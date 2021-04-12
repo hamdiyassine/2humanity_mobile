@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "App",
+    "slug": "test",
+    "privacy": "public",
+    "sdkVersion": "37.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "notification": {
+      "icon":"./assets/iconNotif.png",
+      "color": "#E71319",
+      "androidCollapsedTitle":"App"
+    },
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "io.test",
+      "supportsTablet": true
+
+    },
+    "android": {
+      "package": "io.test",
+      "versionCode":3
+    }
+  }
+}
