@@ -121,7 +121,7 @@ class SignupPage extends Component{
       <View style={{alignItems: 'center', justifyContent: 'center'}} >
         
         <View style={styles.searchSection}>
-          <MdCom style={styles.searchIcon} name="account-card-details" size={20} color="#ddd"/>
+          <MdCom style={styles.searchIcon} name="account" size={20} color="#ddd"/>
           <TextInput style={styles.input} value={this.state.lastName}
             placeholder="Nom" onChangeText={this.changeName}
             underlineColorAndroid="transparent"
@@ -143,6 +143,14 @@ class SignupPage extends Component{
             underlineColorAndroid="transparent"
           />
         </View>}
+
+        {checked && <View style={styles.searchSection}>
+          <MdCom style={styles.searchIcon} name="map-marker" size={20} color="#ddd"/>
+          <TextInput style={styles.input} secureTextEntry={true} value={this.state.repass}
+            placeholder="Adresse" onChangeText={this.changeRepass} 
+            underlineColorAndroid="transparent"
+          />
+        </View>}
         
         {checked && <View style={styles.searchSection}>
           <MdCom style={styles.searchIcon} name="lock-outline" size={20} color="#ddd"/>
@@ -159,6 +167,14 @@ class SignupPage extends Component{
             underlineColorAndroid="transparent"
           />
         </View>}
+
+        <View style={styles.searchSection}>
+          <MdCom style={styles.searchIcon} name="account" size={20} color="#ddd"/>
+          <TextInput style={styles.input} value={this.state.lastName}
+            placeholder="Nom" onChangeText={this.changeName}
+            underlineColorAndroid="transparent"
+          />
+        </View>
 
 
         

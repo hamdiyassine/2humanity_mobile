@@ -3,16 +3,15 @@
     "name": "App",
     "slug": "test",
     "privacy": "public",
-    "sdkVersion": "37.0.0",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
     "notification": {
-      "icon":"./assets/iconNotif.png",
+      "icon": "./assets/iconNotif.png",
       "color": "#E71319",
-      "androidCollapsedTitle":"App"
+      "androidCollapsedTitle": "App"
     },
     "version": "1.0.1",
     "orientation": "portrait",
@@ -26,11 +25,10 @@
     "ios": {
       "bundleIdentifier": "io.test",
       "supportsTablet": true
-
     },
     "android": {
       "package": "io.test",
-      "versionCode":3
+      "versionCode": 3
     }
   }
 }

@@ -117,7 +117,7 @@ export const SignedIn = createBottomTabNavigator({
 export const createRootNavigator = (connected=false) => {
   return createSwitchNavigator({Menu, SignedIn,SignedOut},
     {
-      initialRouteName:  'SignedIn' 
+      initialRouteName:  'SignedOut' 
     }  
   )
 } 
