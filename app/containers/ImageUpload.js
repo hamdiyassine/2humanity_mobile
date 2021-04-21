@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         marginHorizontal:55,
         alignItems:"center",
         justifyContent:"center",
-        marginTop:20,
+        marginTop:16,
       },
       btn:{
         alignItems:"center",
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         borderWidth:2,
         marginTop:15,
         //marginBottom:1,
-        paddingHorizontal:105,
+        paddingHorizontal:86,
         paddingVertical:10,
         borderRadius:23,
         borderColor:'#1b59a2',
