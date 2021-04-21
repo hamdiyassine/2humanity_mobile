@@ -6,9 +6,12 @@ import {StyleSheet, View, Text, TextInput, ActivityIndicator, ScrollView,
   CheckBox, Image, ToastAndroid
 } from 'react-native';
 
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 // import Icon from 'react-native-vector-icons/FontAwesome'; 
 import MdCom from 'react-native-vector-icons/MaterialCommunityIcons';
+import ImageUpload from './ImageUpload';
 // import MdIcon from 'react-native-vector-icons/MaterialIcons'
 
 
@@ -106,15 +109,17 @@ class SignupPage extends Component{
   render(){
     const {checked } = this.state
     return(
-      <ScrollView>
-      <View style={{alignItems: 'center', justifyContent: 'center'}} >
+      <ScrollView style={{ paddingTop:150, backgroundColor:"#e0fbfc"}}>
+      {/* <View style={{alignItems: 'center', justifyContent: 'center'}} >
         <Image source={require('../assets/imgs/logo2.png')}  style={{
           width: 200, height: 150,
           marginTop: 50, marginBottom: 50
         }}/> 
-      </View>
+      </View> */}
+
+
       <View style={{...styles.searchSection, borderWidth: 0}}>
-          <CheckBox value={this.state.checked} onValueChange={this.changeTerms} style={styles.searchIcon} />
+          <CheckBox value={this.state.checked} onValueChange={this.changeTerms}  tintColors={{ true: "#1b59a2"}} />
           <Text style={styles.input}> Nous sommes une association </Text>
         </View> 
 
@@ -168,13 +173,10 @@ class SignupPage extends Component{
           />
         </View>}
 
-        <View style={styles.searchSection}>
-          <MdCom style={styles.searchIcon} name="account" size={20} color="#ddd"/>
-          <TextInput style={styles.input} value={this.state.lastName}
-            placeholder="Nom" onChangeText={this.changeName}
-            underlineColorAndroid="transparent"
-          />
-        </View>
+        
+
+        {/* <ImageUpload style={styles.searchSection}/> */}
+        <ImageUpload></ImageUpload>
 
 
         
@@ -184,20 +186,31 @@ class SignupPage extends Component{
         <Button loading={true} loadingRight={true} color='#1589b7' style={{padding: 10, fontWeight: 'normal'}} title="SE CONNECTER"/>
       </View> */}
       
-      <View onTouchEnd={this.signup} style={{padding: 10, borderRadius: 3, backgroundColor: '#1b59a2', marginBottom: 20,
-        flexDirection:"row", alignItems: 'center', justifyContent: 'center', marginRight: 20, marginLeft: 20}}
+      <View onTouchEnd={this.signup} style={{
+    
+        alignItems:"center",
+        justifyContent:"center",
+       // marginTop:1,
+        backgroundColor:"#1b59a2",
+        paddingVertical:10,
+        marginHorizontal:30,
+        borderRadius:23,
+      }}
       >
         {/* <TouchableOpacity onPress={this.login} style={{justifyContent: 'center', alignItems: 'center'}} > */}
           {(this.state.loading) && <ActivityIndicator style={{paddingRight: 5}} size="small" color="#fff" /> }
-          <Text style={{color: '#fff', textAlign: 'center'}}>S'INSCRIRE</Text>
+          <Text style={{
+            color: '#fff',
+            textAlign: 'center'
+            }}>S'INSCRIRE</Text>
         {/* </TouchableOpacity>  */}
       </View>
-      <View onTouchEnd={this.goToSignin} style={{padding: 10, borderRadius: 3, backgroundColor: '#fff', marginBottom: 20,
+      <View onTouchEnd={this.goToSignin} style={{padding: 10, borderRadius: 3,  backgroundColor: 'transparent', marginBottom: 20,
         flexDirection:"row", alignItems: 'center', justifyContent: 'center', marginRight: 20, marginLeft: 20}}
       >
         {/* <TouchableOpacity onPress={this.login} style={{justifyContent: 'center', alignItems: 'center'}} > */}
           {(this.state.loading) && <ActivityIndicator style={{paddingRight: 5}} size="small" color="#1b59a2" /> }
-          <Text style={{color: '#1b59a2', textAlign: 'center'}}>SE CONNECTER</Text>
+          <Text style={{color: '#1b59a2', textAlign: 'center', }}>SE CONNECTER</Text>
         {/* </TouchableOpacity>  */}
       </View>
       </ScrollView>
@@ -213,17 +226,27 @@ const styles = StyleSheet.create({
   },
 
   searchSection: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 3,
-    marginBottom: 20,
-    marginRight: 20,
-    marginLeft: 20,
-    borderWidth: 1,
-    borderColor: '#1b59a2',
+    // flex: 1,
+    // flexDirection: 'row',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // backgroundColor: '#fff',
+    // borderRadius:  30,
+    // marginBottom: 20,
+    // marginRight: 20,
+    // marginLeft: 20,
+    // borderWidth: 2,
+    // borderColor: '#1b59a2',
+    flexDirection: "row",
+    alignItems:"center",
+    marginHorizontal:30,
+    borderWidth:2,
+    marginTop:15,
+     //marginBottom:10,
+    paddingHorizontal:10,
+    paddingVertical:2,
+    borderRadius:23,
+    borderColor:'#1b59a2',
   },
   searchIcon: { padding: 5 },
   input: {
@@ -231,8 +254,8 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingRight: 5,
     paddingBottom: 5,
-    paddingLeft: 0,
-    backgroundColor: '#fff',
+    paddingLeft: 1,
+    backgroundColor: 'transparent',
     color: '#424242',
     borderRadius: 3
   },
