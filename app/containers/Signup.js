@@ -1,19 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component , useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import authActions from '../redux/auth/actions';
-
+import * as ImagePicker from 'expo-image-picker';
 import {StyleSheet, View, Text, TextInput, ActivityIndicator, ScrollView,
-  CheckBox, ToastAndroid, ImageBackground
+  CheckBox, ToastAndroid, ImageBackground, Image
 } from 'react-native';
+
+//import ImagePicker from 'react-native-image-picker'
 
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 // import Icon from 'react-native-vector-icons/FontAwesome'; 
 import MdCom from 'react-native-vector-icons/MaterialCommunityIcons';
 import ImageUpload from './ImageUpload';
+//import ImageUpload from './ImageUpload';
 // import MdIcon from 'react-native-vector-icons/MaterialIcons'
+
+//const [image, setImage] = useState(null);
+
 
 
 class SignupPage extends Component{
+
+
   static navigationOptions =  ({ navigation }) => {
     return {
       title: "Inscription gratuite", headerTitle: "Inscription gratuite",
@@ -28,7 +36,7 @@ class SignupPage extends Component{
   state={
     loading: false,
     checked: false,
-
+    image: null,
     name: '',
     email: '',
     phone: '',
@@ -38,6 +46,8 @@ class SignupPage extends Component{
   }
 
   signup = ()=>{ 
+
+    
     if(!this.state.loading){
       const msg = this.checkData();
       if(msg != '') ToastAndroid.showWithGravity(
@@ -47,6 +57,7 @@ class SignupPage extends Component{
         this.setState({loading: true});
         userSrv.signup({
          // birthdate: "",
+          image: this.state.image,
           email: this.state.email,
           name: this.state.name,
           password: this.state.pass,
@@ -110,7 +121,13 @@ class SignupPage extends Component{
   // componentWillReceiveProps(nextProps){
     
   // }
+
+  
+
+  
+
   render(){
+
     const {checked } = this.state
     return(
       <ImageBackground source={require('../assets/imgs/bg4.jpg')} style={styles.image}>
@@ -129,11 +146,13 @@ class SignupPage extends Component{
           alignSelf:"center"
         }} >
           Inscription</Text>
-        
+          
         <View style={{...styles.searchSection, borderWidth: 0}}>
             <CheckBox value={this.state.checked} onValueChange={this.changeTerms}  tintColors={{ true: "#1b59a2"}} />
             <Text style={styles.input}> Nous sommes une association </Text>
           </View> 
+
+          <ImageUpload></ImageUpload>
 
         <View style={{alignItems: 'center', justifyContent: 'center'}} >
           
@@ -188,7 +207,7 @@ class SignupPage extends Component{
           
 
           {/* <ImageUpload style={styles.searchSection}/> */}
-          <ImageUpload></ImageUpload>
+          
 
 
           
@@ -202,7 +221,7 @@ class SignupPage extends Component{
       
           alignItems:"center",
           justifyContent:"center",
-        // marginTop:1,
+        marginTop:15,
           backgroundColor:"#1b59a2",
           paddingVertical:10,
           marginHorizontal:30,
@@ -237,24 +256,8 @@ class SignupPage extends Component{
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   alignItems: 'center',
-  //   // justifyContent: 'center'
-  // },
-
+  
   searchSection: {
-    // flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: '#fff',
-    // borderRadius:  30,
-    // marginBottom: 20,
-    // marginRight: 20,
-    // marginLeft: 20,
-    // borderWidth: 2,
-    // borderColor: '#1b59a2',
     flexDirection: "row",
     flex: 1, 
     alignItems:"center",
@@ -289,10 +292,21 @@ const styles = StyleSheet.create({
    marginVertical:100,
     flexDirection: "column",  
     //height:10,
+    justifyContent: "center",
     borderWidth: 0,
     borderRadius:20,
     backgroundColor:"white",
   },
+  // view:{
+  //   //   flex: 1,
+  //   // flexDirection: 'row',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   marginHorizontal:55,
+  //   alignItems:"center",
+  //   justifyContent:"center",
+  //   marginTop:16,
+  // },
 });
 
 //convert PART of state in STORE to the component PROPS
