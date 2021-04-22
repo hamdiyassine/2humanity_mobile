@@ -114,7 +114,7 @@ class SignupPage extends Component{
     const {checked } = this.state
     return(
       <ImageBackground source={require('../assets/imgs/bg4.jpg')} style={styles.image}>
-      <ScrollView style={{marginVertical:100}}>
+      <ScrollView>
       {/* <View style={{alignItems: 'center', justifyContent: 'center'}} >
         <Image source={require('../assets/imgs/logo2.png')}  style={{
           width: 200, height: 150,
@@ -283,14 +283,10 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center"
   },
-  dad:{
-    justifyContent: "flex-start",
-    flex: 1,  
-  },
   container: {
     paddingTop:10,
     marginHorizontal:20,
-   marginVertical:10,
+   marginVertical:100,
     flexDirection: "column",  
     //height:10,
     borderWidth: 0,
