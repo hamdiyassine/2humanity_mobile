@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import {ActivityIndicator} from 'react-native';
 import HeaderMain from '../components/HeaderMain';
 import authActions from '../redux/auth/actions';
+import Post from '../components/Post';
+
 
 import {StyleSheet, View, Text ,Button ,ScrollView, RefreshControl } from 'react-native';
 
@@ -34,13 +36,31 @@ class HomePage extends Component{
       params.toggleAccMdl
     );
   } 
+
+  likePost = ()=>{
+    console.log("hello");
+    
+  }
   
 
   render(){
     let {navigation} = this.props;
+    const post =  {
+      title : "publication test",
+      content : "description de la publication",
+      author:{
+        name:"yassine"
+      },
+      datetime : new Date(),
+      images : [],
+      like_count : 5
+
+    }
     return(
     <View style={styles.container}>
-      <Text style={{ margin: 70}}>Hello !! </Text>
+      <Post post={post} 
+        likePost={this.likePost} navigation={this.props.navigation} 
+      />
     </View>
     );
   }
@@ -49,6 +69,7 @@ class HomePage extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop:5,
     backgroundColor: 'white'
   },
 });

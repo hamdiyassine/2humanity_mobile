@@ -9,11 +9,14 @@ class SigninPage extends Component{
   constructor(props){
     super(props);
 
-  this.state={  
-  username: "", pass:""
-  }     
-  this.input = {}
-}
+    this.state={  
+      username: "",
+      pass:""
+    }    
+    
+    this.input = {}
+  }
+  
   login = ()=>{ 
     if(!this.state.loading && this.state.username!='' && this.state.pass!='')
     this.props.login({username: this.state.username, password: this.state.pass});
@@ -38,44 +41,54 @@ class SigninPage extends Component{
   }
   render(){
     return(
-  <ScrollView  contentContainerStyle={{flexGrow:1}}>
-  <View style={{alignItems: 'center', justifyContent: 'center'}} >
-    <Image source={require('../assets/imgs/logo2.png')}  style={{
-      width: 200, height: 150,
-      marginTop: 100, marginBottom: 70
+  <View style={ styles.container } >
+    <Image source={require('../assets/imgs/bg1.jpg')}  style={{
+      flex:1,width:'100%',height:'100%'
     }}/> 
-  </View>
-  <View style={{alignItems: 'center', justifyContent: 'center'}} >
-    <KeyboardAvoidingView style={styles.searchSection} behavior="padding" enabled >
-      <Ionicons style={styles.searchIcon} name="ios-mail" size={20} color="#ddd"/>
-      <TextInput style={styles.input} value={this.state.username}
-        onSubmitEditing = {this.onSubmitEditing('pass')}
-        placeholder="Email" onChangeText={this.changeUsername} returnKeyType='next' autoCorrect={false}
-        underlineColorAndroid="transparent"
-      />
-    </KeyboardAvoidingView>
-    <KeyboardAvoidingView style={styles.searchSection}behavior="padding" enabled>
-      <Ionicons style={styles.searchIcon} name="md-lock" size={20} color="#ddd"/>
-      <TextInput style={styles.input} secureTextEntry={true} value={this.state.pass}
-        placeholder="Mot de passe" onChangeText={this.changePass} returnKeyType='done' autoCorrect={false}
-        ref={input=>this.input['pass'] = input} 
-        underlineColorAndroid="transparent"
-      />
-    </KeyboardAvoidingView>
-  </View>
 
-  <View onTouchEnd={this.login} style={{padding: 10, borderRadius: 3, marginBottom:10, backgroundColor: '#1b59a2',
-    flexDirection:"row", marginTop:30,alignItems: 'center', justifyContent: 'center', marginRight: 20, marginLeft: 20}} >
-      {(this.props.loading) && <ActivityIndicator style={{paddingRight: 5}} size="small" color="#fff" /> }
-      <Text style={{color: '#fff', textAlign: 'center'}}>SE CONNECTER</Text>
-  </View>
-  <View onTouchEnd={this.goToSignup} style={{padding: 10, borderRadius: 3, marginBottom:30, backgroundColor: '#fff',
-    flexDirection:"row", marginTop:30,alignItems: 'center', justifyContent: 'center', marginRight: 20, marginLeft: 20}} >
-      {(this.props.loading) && <ActivityIndicator style={{paddingRight: 5}} size="small" color="#1b59a2" /> }
-      <Text style={{color: '#1b59a2', textAlign: 'center'}}>S'INSCRIRE</Text>
-  </View>
+    <View style={ styles.loginForm }>
 
-  </ScrollView>
+      <View style={{alignItems: 'center', justifyContent: 'center'}} >
+      <KeyboardAvoidingView style={styles.searchSection} behavior="padding" enabled >
+        <Ionicons style={styles.searchIcon} name="ios-mail" size={20} color="#ddd"/>
+        <TextInput style={styles.input} value={this.state.username}
+          onSubmitEditing = {this.onSubmitEditing('pass')}
+          placeholder="Email" onChangeText={this.changeUsername} returnKeyType='next' autoCorrect={false}
+          underlineColorAndroid="transparent"
+        />
+      </KeyboardAvoidingView>
+      <KeyboardAvoidingView style={styles.searchSection}behavior="padding" enabled>
+        <Ionicons style={styles.searchIcon} name="md-lock" size={20} color="#ddd"/>
+        <TextInput style={styles.input} secureTextEntry={true} value={this.state.pass}
+          placeholder="Mot de passe" onChangeText={this.changePass} returnKeyType='done' autoCorrect={false}
+          ref={input=>this.input['pass'] = input} 
+          underlineColorAndroid="transparent"
+        />
+      </KeyboardAvoidingView>
+    </View>
+
+    <View onTouchEnd={this.login} style={{padding: 10, borderRadius: 3, marginBottom:10, backgroundColor: '#1b59a2',
+      flexDirection:"row", marginTop:30,alignItems: 'center', justifyContent: 'center', marginRight: 20, marginLeft: 20}} >
+        {(this.props.loading) && <ActivityIndicator style={{paddingRight: 5}} size="small" color="#fff" /> }
+        <Text style={{color: '#fff', textAlign: 'center'}}>SE CONNECTER</Text>
+    </View>
+    <View onTouchEnd={this.goToSignup} style={{padding: 10, borderRadius: 3, marginBottom:-50,
+      flexDirection:"row", marginTop:20,alignItems: 'center', justifyContent: 'center', marginRight: 20, marginLeft: 20}} >
+        {(this.props.loading) && <ActivityIndicator style={{paddingRight: 5}} size="small" color="#1b59a2" /> }
+        <Text style={{color: '#1b59a2', textAlign: 'center', fontSize:18,fontWeight:'bold'}}>S'INSCRIRE</Text>
+    </View>
+
+    <View style={{padding: 10, borderRadius: 3, marginBottom:2,
+      flexDirection:"row",marginTop:120 , alignItems: 'center', justifyContent: 'center', marginRight: 5, marginLeft: 70}} >
+        {(this.props.loading) && <ActivityIndicator style={{paddingRight: 5}} size="small" color="#1b59a2" /> }
+        <Text style={{color: '#fff', textAlign: 'center', fontSize:18}}>Continuer en tant qu'invité</Text>
+    </View>
+      
+    </View>
+  
+    
+
+  </View>
   );
 }
 }
@@ -83,8 +96,20 @@ class SigninPage extends Component{
 const styles = StyleSheet.create({
 container: {
 flex: 1,
-alignItems: 'center',
+//alignItems: 'center',
 // justifyContent: 'center'
+},
+
+loginForm : {
+  position: 'absolute',
+  marginTop:70,
+  top: 50,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  paddingTop:75,
+  alignItems: 'center',
+  justifyContent: 'center'
 },
 
 searchSection: {
@@ -93,11 +118,12 @@ flexDirection: 'row',
 justifyContent: 'center',
 alignItems: 'center',
 backgroundColor: '#fff',
-borderRadius: 3,
+borderRadius: 5,
 marginBottom: 20,
-marginRight: 20,
-marginLeft: 20,
+marginRight: 30,
+marginLeft: 70,
 borderWidth: 1,
+maxHeight:50,
 borderColor: '#312566',
 },
 searchIcon: { padding: 5 },
@@ -109,7 +135,7 @@ paddingBottom: 5,
 paddingLeft: 0,
 backgroundColor: '#fff',
 color: '#424242',
-borderRadius: 3
+borderRadius: 5
 },
 
 divider:{
@@ -137,8 +163,6 @@ loading, connected,
 token: state.Auth.get('token'), 
 user: state.Auth.get('user'),
 user_type: state.Auth.get('user_type'),
-childrens:state.Auth.get('childrens'),
-class:state.Auth.get('class')
 };
 }
 

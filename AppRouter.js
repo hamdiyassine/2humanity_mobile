@@ -13,18 +13,18 @@ import HomePage           from "./app/containers/Home";
 // import JobOffersPage  from "./app/containers/JobOffers"; 
 import SigninPage     from "./app/containers/Signin";
 import SignupPage     from "./app/containers/Signup";
+import OptionsPage        from "./app/containers/Options";
 
-
-const Menu = createDrawerNavigator(
-  {
-    "Home": { screen: HomePage },
-  },
-  {
-    drawerWidth: 300,
-    drawerPosition: 'left',
-    initialRouteName: 'Home',
-  }
-)
+// const Menu = createDrawerNavigator(
+//   {
+//     "Home": { screen: HomePage },
+//   },
+//   {
+//     drawerWidth: 300,
+//     drawerPosition: 'left',
+//     initialRouteName: 'Home',
+//   }
+// )
 
 
 // const MenuContainer = () => {
@@ -47,6 +47,15 @@ const Menu = createDrawerNavigator(
 //     </React.Fragment>
 //   )
 // }
+
+const MenuStack = createStackNavigator({
+  Menu: { screen: OptionsPage},
+
+  // Événements: EventsPage,
+ }, 
+{ initialRouteName: 'Menu' }
+);
+
 
 export const SignedOut = createStackNavigator(
  
@@ -86,8 +95,9 @@ export const SignedIn = createBottomTabNavigator({
     //   header: HeaderMain,
     // }),
   },
-  Contact: {screen: HomeStack},
-  Menu: {screen: HomeStack}, 
+  Events: {screen: HomeStack},
+  Favoris: {screen: HomeStack},
+  Menu: {screen: MenuStack}, 
  // Users: UsersStack
 },{
   defaultNavigationOptions: ({ navigation }) => ({
@@ -99,7 +109,9 @@ export const SignedIn = createBottomTabNavigator({
       switch (routeName) {
         case 'Home': iconName = 'md-home'; break;
      //   case 'Users': iconName = 'ios-people'; break;
-         case 'Contact': iconName = 'md-calendar'; 
+        case 'Favoris': iconName = 'md-planet'; break;
+        case 'Events': iconName = 'md-calendar'; break;
+        
        //   IconComponent = NotifIconWithBadge;   
         break; 
         case 'Menu': iconName = 'md-menu'; break;
@@ -115,7 +127,7 @@ export const SignedIn = createBottomTabNavigator({
 
 
 export const createRootNavigator = (connected=false) => {
-  return createSwitchNavigator({Menu, SignedIn,SignedOut},
+  return createSwitchNavigator({ SignedIn,SignedOut},
     {
       initialRouteName:  'SignedIn' 
     }  
