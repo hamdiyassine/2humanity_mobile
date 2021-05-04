@@ -40,7 +40,7 @@ class HomePage extends Component{
     let {navigation} = this.props;
     return(
     <View style={styles.container}>
-      {/* <Text style={{ margin: 70}}>Hello !! </Text> */}
+      <Text style={{ margin: 70}}>Hello !! </Text>
      
     </View>
     );

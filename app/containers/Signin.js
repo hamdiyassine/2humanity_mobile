@@ -42,7 +42,7 @@ class SigninPage extends Component{
   <ScrollView  >
   <View style={styles.container} >
         <Text style={{
-          fontSize:40,
+          fontSize:30,
           color:"#1b59a2",
           alignSelf:"center",
           marginTop:10,

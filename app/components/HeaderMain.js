@@ -37,7 +37,7 @@ export default function HeaderMain(nav, changeSearch, toggleAccMdl=null, showUse
     ),
  
     headerStyle: {
-      backgroundColor: 'white',
+      backgroundColor: '#1b59a2',
     }, 
     headerTintColor: 'black',
     headerTitleStyle: {
