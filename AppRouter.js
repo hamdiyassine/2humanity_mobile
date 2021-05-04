@@ -9,11 +9,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 //https://oblador.github.io/react-native-vector-icons/
 //https://medium.com/the-react-native-log/building-an-authentication-flow-with-react-navigation-fb5de2203b5c
 
-import HomePage           from "./app/containers/Home";
+import HomePage  from "./app/containers/Home";
 // import JobOffersPage  from "./app/containers/JobOffers"; 
 import SigninPage     from "./app/containers/Signin";
 import SignupPage     from "./app/containers/Signup";
-
+import AddPostScreen from "./app/containers/AddPostScreen";
 
 const Menu = createDrawerNavigator(
   {
@@ -61,6 +61,7 @@ export const SignedOut = createStackNavigator(
 const HomeStack = createStackNavigator(
   { 
     Home: { screen: HomePage},
+    Add: AddPostScreen
 
   }, 
   { 
@@ -115,7 +116,8 @@ export const SignedIn = createBottomTabNavigator({
 
 
 export const createRootNavigator = (connected=false) => {
-  return createSwitchNavigator({Menu, SignedIn,SignedOut},
+  return createSwitchNavigator({SignedIn,SignedOut},
+    // Menu, 
     {
       initialRouteName:  'SignedOut' 
     }  
