@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ant-design/react-native": "^3.1.1",
+    "@mdi/font": "^5.9.55",
     "@react-navigation/drawer": "^5.11.4",
     "axios": "^0.19.0",
     "expo": "^41.0.0",
@@ -30,7 +31,7 @@
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-htmlview": "^0.13.0",
-    "react-native-image-picker": "^0.28.1",
+    "react-native-image-picker": "^3.3.2",
     "react-native-interactive-image-gallery": "^0.1.2",
     "react-native-modal-datetime-picker": "^7.6.0",
     "react-native-paper": "^4.8.1",

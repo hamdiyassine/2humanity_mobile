@@ -119,7 +119,7 @@ export const createRootNavigator = (connected=false) => {
   return createSwitchNavigator({SignedIn,SignedOut},
     // Menu, 
     {
-      initialRouteName:  'SignedIn' 
+      initialRouteName:  'SignedOut' 
     }  
   )
 } 
