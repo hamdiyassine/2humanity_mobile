@@ -13,6 +13,9 @@ import HomePage           from "./app/containers/Home";
 // import JobOffersPage  from "./app/containers/JobOffers"; 
 import SigninPage     from "./app/containers/Signin";
 import SignupPage     from "./app/containers/Signup";
+// import ProfileAssociation from "./app/containers/ProfileAssociation";
+// import ProfileVolunteer from "./app/containers/ProfileVolunteer";
+
 
 
 const Menu = createDrawerNavigator(
@@ -88,6 +91,8 @@ export const SignedIn = createBottomTabNavigator({
   },
   Contact: {screen: HomeStack},
   Menu: {screen: HomeStack}, 
+
+ 
  // Users: UsersStack
 },{
   defaultNavigationOptions: ({ navigation }) => ({
@@ -117,7 +122,7 @@ export const SignedIn = createBottomTabNavigator({
 export const createRootNavigator = (connected=false) => {
   return createSwitchNavigator({Menu, SignedIn,SignedOut},
     {
-      initialRouteName:  'SignedOut' 
+      initialRouteName:  'SignedIn' 
     }  
   )
 } 
