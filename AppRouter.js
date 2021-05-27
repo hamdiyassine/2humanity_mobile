@@ -1,3 +1,4 @@
+ 
 import React from 'react';
 import {createSwitchNavigator , createAppContainer} from 'react-navigation';
 import { createMaterialTopTabNavigator ,createBottomTabNavigator} from 'react-navigation-tabs';
@@ -8,13 +9,17 @@ import {Header, Icon , View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 //https://oblador.github.io/react-native-vector-icons/
 //https://medium.com/the-react-native-log/building-an-authentication-flow-with-react-navigation-fb5de2203b5c
+import EventPage      from "./app/containers/Event";
+import EventsPage         from "./app/containers/Events";
 
-import HomePage           from "./app/containers/Home";
+import HomePage  from "./app/containers/Home";
 // import JobOffersPage  from "./app/containers/JobOffers"; 
 import SigninPage     from "./app/containers/Signin";
 import SignupPage     from "./app/containers/Signup";
 
-
+import AddPostScreen from "./app/containers/AddPostScreen";
+import RecommendedScreen from './app/containers/RecommendedScreen';
+import TopUsers from './app/containers/TopUsers';
 const Menu = createDrawerNavigator(
   {
     "Home": { screen: HomePage },
@@ -25,6 +30,18 @@ const Menu = createDrawerNavigator(
     initialRouteName: 'Home',
   }
 )
+import OptionsPage        from "./app/containers/Options";
+
+// const Menu = createDrawerNavigator(
+//   {
+//     "Home": { screen: HomePage },
+//   },
+//   {
+//     drawerWidth: 300,
+//     drawerPosition: 'left',
+//     initialRouteName: 'Home',
+//   }
+// )
 
 
 // const MenuContainer = () => {
@@ -48,6 +65,17 @@ const Menu = createDrawerNavigator(
 //   )
 // }
 
+const MenuStack = createStackNavigator({
+  Menu: { screen: OptionsPage},
+
+  Événements: EventsPage,
+
+  Event: EventPage,
+ }, 
+{ initialRouteName: 'Menu' }
+);
+
+
 export const SignedOut = createStackNavigator(
  
   {
@@ -57,10 +85,47 @@ export const SignedOut = createStackNavigator(
   },
   {headerMode: 'none',}
 )
-
+export const Recommendation = createStackNavigator(
+ 
+  {
+    Recommend: {screen: RecommendedScreen},
+    
+  },
+  {
+    defaultNavigationOptions: {
+      title: 'Explore',
+      headerTintColor: '#fff',
+      headerStyle: { 
+        backgroundColor: '#1b59a2',
+      },
+    }
+  }
+  
+  
+)
+export const topUsers = createStackNavigator(
+ 
+  {
+    topusers: {screen: TopUsers},
+    
+  },
+  {
+    defaultNavigationOptions: {
+      title: 'Top users',
+      headerTintColor: '#fff',
+      headerStyle: { 
+        backgroundColor: '#1b59a2',
+      },
+    }
+  }
+  
+  
+)
 const HomeStack = createStackNavigator(
   { 
     Home: { screen: HomePage},
+    Add: AddPostScreen
+    
 
   }, 
   { 
@@ -86,8 +151,12 @@ export const SignedIn = createBottomTabNavigator({
     //   header: HeaderMain,
     // }),
   },
-  Contact: {screen: HomeStack},
-  Menu: {screen: HomeStack}, 
+  Events: {screen: HomeStack},
+  Favoris: {screen: HomeStack},
+  Menu: {screen: MenuStack}, 
+  Recommend:{screen:Recommendation},
+  Top:{screen:topUsers}
+  // Recommend: {screen: RecommendedScreen}, 
  // Users: UsersStack
 },{
   defaultNavigationOptions: ({ navigation }) => ({
@@ -99,7 +168,11 @@ export const SignedIn = createBottomTabNavigator({
       switch (routeName) {
         case 'Home': iconName = 'md-home'; break;
      //   case 'Users': iconName = 'ios-people'; break;
-         case 'Contact': iconName = 'md-calendar'; 
+        case 'Favoris': iconName = 'md-planet'; break;
+        case 'Events': iconName = 'md-calendar'; break;
+        case 'Recommend': iconName = 'compass'; break;
+        case 'Top':iconName='star'; break;
+        
        //   IconComponent = NotifIconWithBadge;   
         break; 
         case 'Menu': iconName = 'md-menu'; break;
@@ -115,7 +188,8 @@ export const SignedIn = createBottomTabNavigator({
 
 
 export const createRootNavigator = (connected=false) => {
-  return createSwitchNavigator({Menu, SignedIn,SignedOut},
+  return createSwitchNavigator({SignedIn,SignedOut},
+    // Menu, 
     {
       initialRouteName:  'SignedIn' 
     }  
