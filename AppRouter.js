@@ -11,6 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 //https://medium.com/the-react-native-log/building-an-authentication-flow-with-react-navigation-fb5de2203b5c
 import EventPage      from "./app/containers/Event";
 import EventsPage         from "./app/containers/Events";
+import AddEventPage         from "./app/containers/AddEvent";
 
 import HomePage  from "./app/containers/Home";
 // import JobOffersPage  from "./app/containers/JobOffers"; 
@@ -67,11 +68,12 @@ import OptionsPage        from "./app/containers/Options";
 const MenuStack = createStackNavigator({
   Menu: { screen: OptionsPage},
 
-  Événements: EventsPage,
-
+  Événements: EventsPage ,
+  
   Event: EventPage,
  }, 
-{ initialRouteName: 'Menu' }
+{ initialRouteName: 'Menu' ,
+  headerMode: 'none' }
 );
 
 
@@ -104,6 +106,26 @@ const HomeStack = createStackNavigator(
   }
 );
 
+const EventsStack = createStackNavigator(
+  { 
+    Events: { screen: EventsPage},
+    EventDetail : EventPage ,
+    AddEvent : AddEventPage ,
+  }, 
+  { 
+    //headerMode: 'none',
+    initialRouteName: 'Events',
+    defaultNavigationOptions: {
+      title: 'Événements',
+      headerTintColor: '#fff',
+      headerStyle: { 
+        backgroundColor: '#1b59a2',
+        fontWeight: 'bold'
+      },
+    }
+  }
+);
+
 
 
 //const NotifIconWithBadge = (props) => <IconWithBadge {...props} badgeCount={0} />;  
@@ -114,7 +136,7 @@ export const SignedIn = createBottomTabNavigator({
     //   header: HeaderMain,
     // }),
   },
-  Events: {screen: HomeStack},
+  Events: {screen: EventsStack},
   Favoris: {screen: HomeStack},
   Menu: {screen: MenuStack}, 
  // Users: UsersStack
@@ -149,7 +171,7 @@ export const createRootNavigator = (connected=false) => {
   return createSwitchNavigator({SignedIn,SignedOut},
     // Menu, 
     {
-      initialRouteName:  'SignedIn' 
+      initialRouteName:  'SignedOut' 
     }  
   )
 } 

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {AsyncStorage, StyleSheet, View, ActivityIndicator, 
-  TouchableOpacity, TextInput, ScrollView
+  TouchableOpacity, TextInput, ScrollView , Text
 } from 'react-native';
+import { Button, IconButton } from 'react-native-paper';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
-
+import { Card } from '../styles/FeedStyles';
 import {eventSrv} from '../services/api';
 import Event from '../components/EventCmp';
 const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
@@ -51,7 +52,7 @@ export default class EventsPage extends Component{
 
   componentDidMount(){
     this.setState({loading: true});
-    this.getEvents();
+    this.getData();
 
     AsyncStorage.multiGet(['token', 'user']).then(data=>{
       const token = data[0][1], user= data[1][1];
@@ -65,6 +66,20 @@ export default class EventsPage extends Component{
     //   })
     })
   } 
+
+  getData= ()=>{
+    fetch("http://192.168.43.182:5050/events/list", {
+    method: "GET",
+    })
+    .then(response => response.json())
+    .then((json)=>{
+        console.log("//// events : ",json);
+        //this.setState({events:json})
+        
+    })
+
+    .catch(error => alert("Error " + error))
+}
   
   getEvents = (offset=0)=>{
     // const lengthEstabs = this.state.events.length;
@@ -123,6 +138,16 @@ export default class EventsPage extends Component{
           }}
           scrollEventThrottle={400}
         >
+        <View style={{margin:5,marginRight:-180}}>
+            
+
+            <Button   style={{width:150,borderRadius:3,alignSelf:'center'}} labelStyle={{fontSize:12}} icon="plus" mode="contained"
+              onPress={()=>this.props.navigation.navigate('AddEvent', {})}
+             color="rgba(231,76,60,1)" >
+             Add new Event 
+            </Button>
+            
+       </View>
 
           
           {this.state.events.map((event, indx) => (

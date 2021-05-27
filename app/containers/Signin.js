@@ -24,6 +24,11 @@ class SigninPage extends Component{
     navigate("Signup", {})
   }
 
+  goToHome = ()=>{
+    const { navigate } = this.props.navigation;
+    navigate("Home", {})
+  }
+
   changeUsername=(txt)=> this.setState({username: txt}); 
   changePass=(txt)    => this.setState({pass: txt});
   onSubmitEditing = (field)=>()=> this.input[field].focus()
@@ -84,6 +89,12 @@ class SigninPage extends Component{
           flexDirection:"row", alignItems: 'center', justifyContent: 'center', marginRight: 20, marginLeft: 20}} >
       {(this.props.loading) && <ActivityIndicator style={{paddingRight: 5}} size="small" color="#1b59a2" /> }
       <Text style={{color: '#1b59a2', textAlign: 'center'}}>S'INSCRIRE</Text>
+  </View>
+
+  <View onTouchEnd={this.goToHome} style={{padding: 10, borderRadius: 3,  backgroundColor: 'transparent', marginBottom: 20,
+          flexDirection:"row", alignItems: 'center', justifyContent: 'center', marginRight: 20, marginLeft: 20}} >
+      {(this.props.loading) && <ActivityIndicator style={{paddingRight: 5}} size="small" color="#1b59a2" /> }
+      <Text style={{color: '#1b59a2', textAlign: 'center',fontWeight:'bold'}}>Continuer en tant qu'invité</Text>
   </View>
     </View>
   </ScrollView>

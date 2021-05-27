@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AsyncStorage,LogBox} from 'react-native';
+import {AsyncStorage , LogBox } from 'react-native';
 
 import { createAppContainer } from 'react-navigation';
 
@@ -28,7 +28,7 @@ export default class App extends Component{
   }
   render() {
     // console.disableYellowBox = true;
-    LogBox.ignoreAllLogs();
+    // LogBox.ignoreAllLogs();
     const {connected, checkedConnected}=this.state;
     if(!checkedConnected) return null;
 

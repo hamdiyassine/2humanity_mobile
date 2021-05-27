@@ -157,16 +157,16 @@ export default class EventPage extends Component{
         <View style={{...styles.wrapAttr,marginLeft : 20}}>
           <Ionicons style={styles.attrIcon} name="ios-clock" />
           <Text style={styles.attrTxt}>
-            Début {date.format("DD-MM-YYYY HH:mm")}
+             {date.format("DD-MM-YYYY HH:mm")}
           </Text>
         </View>
 
-        <View style={{...styles.wrapAttr,marginLeft : 20}}>
+        {/* <View style={{...styles.wrapAttr,marginLeft : 20}}>
           <Ionicons style={styles.attrIcon} name="ios-clock" />
           <Text style={styles.attrTxt}>
             Fin {"    "+Moment(event.date_end).format("DD-MM-YYYY HH:mm")}
           </Text>
-        </View>
+        </View> */}
 
         <View style={{...styles.wrapAttr,marginLeft : 20}}>
           <Ionicons style={styles.attrIcon} name="ios-pin" />

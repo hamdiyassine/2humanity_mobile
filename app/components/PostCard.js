@@ -28,10 +28,49 @@ class PostCard extends React.Component  {
        })
        console.log(this.state.viewed)
      }
+
+     componentDidMount(){
+      this.getData(this.props.id);
+     }
+
+     getData= (post_id)=>{
+      fetch(`http://192.168.43.182:5050/comments/${post_id}`, {
+        method: "GET",
+      })
+        .then(response => response.json())
+        .then((json)=>this.setState({Allcomments:json}))
+    
+        .catch(error => alert("Error " + error))
+      }
+
+     sendData= (post_id)=>{
+       fetch(`http://192.168.43.182:5050/comments/${post_id}`, {
+      
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: this.state.newComment,
+        user : this.props.user_id
+      })
+    })
+      .then(response => response.json())
+      
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => alert("Error " + error))
+
+    }
+
      addComment(){
+       
        this.setState({
          comments:this.state.comments+1,
         Allcomments:[...this.state.Allcomments,this.state.newComment]
+       },()=>{
+         this.sendData(this.props.id)
        })
     
      }
@@ -81,6 +120,25 @@ class PostCard extends React.Component  {
       })
      
      }
+
+     removeCommentRequest(post_id ,comment_id ){
+        fetch(`http://192.168.43.182:5050/comments/${post_id}/${comment_id}`, {
+        
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+          _id:id
+          })
+        })
+        .then(response => response.json())
+        .then(response => {
+          console.log("comment deleted")
+        })
+        .then(Alert.alert('comment deleted successfully'))
+        .catch(error => alert("Error " + error))
+     }
     
      removeComment(e){
       var array = this.state.Allcomments.filter(function(item) {
@@ -88,12 +146,14 @@ class PostCard extends React.Component  {
       });
       this.setState({
         Allcomments: array
+      },()=>{
+        this.removeCommentRequest(this.props.id,e.id)
       })
     }
     
     render(){
         return (
-            <Container>
+            <Container style={{marginLeft:-12}}>
               
      <Card>
        
@@ -156,7 +216,7 @@ class PostCard extends React.Component  {
        </View> 
     
        </InteractionWrapper>
-       <FlatList 
+       {this.state.Allcomments.length>0 && <FlatList 
    data={this.state.Allcomments}
    renderItem={({item})=>
    <View style={{backgroundColor:'#F5F5F5', margin:10, height:50, borderRadius:25,padding:10,flexDirection:'row',display: 'flex',justifyContent:'flex-end'}}>
@@ -167,7 +227,7 @@ class PostCard extends React.Component  {
      </View>}
          keyExtractor={item=>item.id}
 
-   />
+   />}
 </Card>
     </Container>
         )

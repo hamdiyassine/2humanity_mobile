@@ -6,6 +6,7 @@ import PostCard from '../components/PostCard';
 import { ScrollView } from 'react-native-gesture-handler';
 import {Container,Card,UserImg,UserInfo,Interaction,InteractionWrapper,InteractionText, UserName,PostImg, UserInfoText,PostTime,PostText, Divider} from '../styles/FeedStyles';
 import AddPostScreen from './AddPostScreen';
+import HeaderMain from '../components/HeaderMain';
 import {connect} from 'react-redux';
  class Home extends React.Component{
 
@@ -14,12 +15,23 @@ import {connect} from 'react-redux';
     this.hideModal = this.hideModal.bind(this);
 
     this.state={
+      searchTxt:'',
       Posts:[],
       refreshing:false,
       modalVisible: false,
       
     }
   }
+
+  static navigationOptions =  ({ navigation }) => {
+    const {params = {}} = navigation.state;
+
+    return HeaderMain(navigation, params.changeSearch, 
+      params.toggleAccMdl
+    );
+  } 
+
+  
    componentDidMount(){
     this.getData();
   }
@@ -29,7 +41,7 @@ import {connect} from 'react-redux';
 
   _onRefresh() {
     this.setState({refreshing: true});
-    fetch("http://192.168.1.8:5050/posts/getAll", { 
+    fetch("http://192.168.10.16:5050/posts/getAll", { 
       method: "GET", 
     })
    
@@ -41,8 +53,9 @@ import {connect} from 'react-redux';
    .catch(error => alert("Error " + error))
 
   }
+
   getData= ()=>{
-     fetch("http://192.168.1.8:5050/posts/getAll", {
+     fetch("http://192.168.1.12:5050/posts", {
    method: "GET",
  })
    .then(response => response.json())
@@ -84,14 +97,16 @@ import {connect} from 'react-redux';
        </View>
        </ScrollView>
 
-     <FlatList 
+     {this.state.Posts.length > 0 && <FlatList 
      
      data={this.state.Posts}
      renderItem={({item})=>
-     <PostCard allPosts={this.state.Posts} content={item.content} image={item.media} user={item.postedBy} date={item.createdAt} id={item._id}/>}
-    keyExtractor={item=>item.id}
-    showsVerticalScrollIndicator={false}
-/>
+     <PostCard allPosts={this.state.Posts} content={item.content} image={item.media}
+      user={item.postedBy} user_id={this.props.user ? this.props.user._id : ''} 
+      date={item.createdAt} id={item._id}/>}
+      keyExtractor={item=>item.id}
+      showsVerticalScrollIndicator={false}
+    />}
 {console.log("POSTS ARE "+this.props.Posts)
 }
           <Modal
@@ -158,7 +173,8 @@ const styles = StyleSheet.create({
 });
 const MapStateToProps=(state)=>{
   return{
-    Posts:state.Post_Reducer.Posts
+    Posts:state.Post_Reducer.Posts,
+    user : state.Auth.user
   }
 }
 
