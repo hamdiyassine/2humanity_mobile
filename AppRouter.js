@@ -19,7 +19,8 @@ import SigninPage     from "./app/containers/Signin";
 import SignupPage     from "./app/containers/Signup";
 
 import AddPostScreen from "./app/containers/AddPostScreen";
-
+import RecommendedScreen from './app/containers/RecommendedScreen';
+import TopUsers from './app/containers/TopUsers';
 const Menu = createDrawerNavigator(
   {
     "Home": { screen: HomePage },
@@ -86,11 +87,47 @@ export const SignedOut = createStackNavigator(
   },
   {headerMode: 'none',}
 )
-
+export const Recommendation = createStackNavigator(
+ 
+  {
+    Recommend: {screen: RecommendedScreen},
+    
+  },
+  {
+    defaultNavigationOptions: {
+      title: 'Explore',
+      headerTintColor: '#fff',
+      headerStyle: { 
+        backgroundColor: '#1b59a2',
+      },
+    }
+  }
+  
+  
+)
+export const topUsers = createStackNavigator(
+ 
+  {
+    topusers: {screen: TopUsers},
+    
+  },
+  {
+    defaultNavigationOptions: {
+      title: 'Top users',
+      headerTintColor: '#fff',
+      headerStyle: { 
+        backgroundColor: '#1b59a2',
+      },
+    }
+  }
+  
+  
+)
 const HomeStack = createStackNavigator(
   { 
     Home: { screen: HomePage},
     Add: AddPostScreen
+    
 
   }, 
   { 
@@ -139,6 +176,9 @@ export const SignedIn = createBottomTabNavigator({
   Events: {screen: EventsStack},
   Favoris: {screen: HomeStack},
   Menu: {screen: MenuStack}, 
+  Recommend:{screen:Recommendation},
+  Top:{screen:topUsers}
+  // Recommend: {screen: RecommendedScreen}, 
  // Users: UsersStack
 },{
   defaultNavigationOptions: ({ navigation }) => ({
@@ -152,6 +192,8 @@ export const SignedIn = createBottomTabNavigator({
      //   case 'Users': iconName = 'ios-people'; break;
         case 'Favoris': iconName = 'md-planet'; break;
         case 'Events': iconName = 'md-calendar'; break;
+        case 'Recommend': iconName = 'compass'; break;
+        case 'Top':iconName='star'; break;
         
        //   IconComponent = NotifIconWithBadge;   
         break; 
