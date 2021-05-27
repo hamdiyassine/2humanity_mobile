@@ -54,11 +54,11 @@ const UserProfileScreen = () => {
   const [associationPassword, setAssociationPassword] = useState("test");
   const [associationRating, setAssociationRating ] = useState(0);
   const [type , setType] = useState(null);
-
+  const [avatar, setAvatar] = useState('https://devtalk.blender.org/uploads/default/original/2X/c/cbd0b1a6345a44b58dda0f6a355eb39ce4e8a56a.png')
   const [association , setAssociation] = useState(false)
 
   const id="606745d5f2f72552140d5743" //id of the logged in user
-  const ip="0.0.0.0" //ip adrs of the server 
+  const ip="192.168.1.8" //ip adrs of the server 
   
   React.useEffect(() => {
     fetch(`http://${ip}:5050/users/${id}`)
@@ -70,6 +70,8 @@ const UserProfileScreen = () => {
         setAssociationPhone(data.mobile)
         setAssociationName(data.name)
         setAssociationRating(data.rating)
+        setAvatar(data.avatar)
+        console.log(data)
         if(data.type==='association'){
           setType('association')
           setAssociation(true)
@@ -249,7 +251,7 @@ const UserProfileScreen = () => {
                 />
               </KeyboardAvoidingView>
 
-              <KeyboardAvoidingView style={styles.searchSection} behavior="padding" enabled >
+              {association && <KeyboardAvoidingView style={styles.searchSection} behavior="padding" enabled >
               <MdCom style={styles.searchIcon} name="email-outline" size={20} color="#ddd"/>
                 <TextInput style={styles.input} 
                   defaultValue={associationEmail}
@@ -258,7 +260,7 @@ const UserProfileScreen = () => {
                   placeholder="Email"  returnKeyType='next' autoCorrect={false}
                   underlineColorAndroid="transparent"
                 />
-              </KeyboardAvoidingView>
+              </KeyboardAvoidingView>}
 
               <KeyboardAvoidingView style={styles.searchSection} behavior="padding" enabled >
               <MdCom style={styles.searchIcon} name="phone" size={20} color="#ddd"/>
@@ -271,7 +273,7 @@ const UserProfileScreen = () => {
                 />
               </KeyboardAvoidingView>
 
-              <KeyboardAvoidingView style={styles.searchSection} behavior="padding" enabled >
+              {association && <KeyboardAvoidingView style={styles.searchSection} behavior="padding" enabled >
               <MdCom style={styles.searchIcon} name="map-marker" size={20} color="#ddd"/>
                 <TextInput style={styles.input} 
                   defaultValue={associationAddress}
@@ -281,7 +283,7 @@ const UserProfileScreen = () => {
                   underlineColorAndroid="transparent"
                   
                 />
-              </KeyboardAvoidingView>
+              </KeyboardAvoidingView>}
 
               {showPasswordInput? <KeyboardAvoidingView style={styles.searchSection}behavior="padding" enabled>
               <MdCom style={styles.searchIcon} name="lock-outline" size={20} color="#ddd"/>
@@ -317,7 +319,7 @@ const UserProfileScreen = () => {
 
                           <Button onPress={onSubmitEdit}
                           color="#1589b7" mode="outlined" style={{marginVertical:10, borderRadius:30, marginRight:45}}>
-                                  Submit
+                                  Enregistrer
                           </Button>
 
                           
@@ -328,7 +330,7 @@ const UserProfileScreen = () => {
                             setShowPasswordInput(false)
                             setShowPasswordConfirmation(false)
                           }} color="#1589b7" mode="outlined" style={{marginVertical:10, borderRadius:30}}>
-                                  Cancel
+                                  Annuler
                           </Button>
               </View>
 
@@ -348,26 +350,26 @@ const UserProfileScreen = () => {
 
                 <View style={{ alignSelf: "center" }}>
                     <View style={styles.profileImage}>
-                        <Image source={require('../assets/imgs/user.png')} style={styles.image} resizeMode="center"></Image>
+                        <Image source={{uri : `${avatar}`}} style={styles.image} resizeMode="center"></Image>
                     </View>
                 </View>
 
                 <View style={styles.infoContainer}>
                     <Text style={[styles.text, { fontWeight: "200", fontSize: 36, marginBottom:10 }]}>{associationName}</Text>
-                    <View style={styles.row}>
+                   {association && <View style={styles.row}>
                       <Icon name="map-marker-radius" color="#777777" size={20}/>
                       <Text style={{color:"#777777", marginLeft: 10}}>{associationAddress}</Text>
-                    </View>
+                    </View>}
 
                     <View style={styles.row}>
                       <Icon name="phone" color="#777777" size={20}/>
                       <Text style={{color:"#777777", marginLeft: 10}}>+216 {associationPhone}</Text>
                     </View>
 
-                    <View style={styles.row}>
+                   { association && <View style={styles.row}>
                       <Icon name="email" color="#777777" size={20}/>
                       <Text style={{color:"#777777", marginLeft: 10}}>{associationEmail}</Text>
-                    </View>
+                    </View>}
 
                     {association? <View style={styles.row}>
                       {associationRating>0 ?<RateIcon name="emoji-flirt" color="#777777" size={20}/> : null}
