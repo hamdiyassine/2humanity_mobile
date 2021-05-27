@@ -13,7 +13,7 @@ import HomePage           from "./app/containers/Home";
 // import JobOffersPage  from "./app/containers/JobOffers"; 
 import SigninPage     from "./app/containers/Signin";
 import SignupPage     from "./app/containers/Signup";
-// import ProfileAssociation from "./app/containers/ProfileAssociation";
+import Profile from "./app/containers/Profile";
 // import ProfileVolunteer from "./app/containers/ProfileVolunteer";
 
 
@@ -91,7 +91,7 @@ export const SignedIn = createBottomTabNavigator({
   },
   Contact: {screen: HomeStack},
   Menu: {screen: HomeStack}, 
-
+  //Profile : {screen: Profile}
  
  // Users: UsersStack
 },{

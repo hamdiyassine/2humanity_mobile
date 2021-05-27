@@ -53,7 +53,10 @@ const UserProfileScreen = () => {
   const [associationPhone, setAssociationPhone] = useState("99999999");
   const [associationPassword, setAssociationPassword] = useState("test");
   const [associationRating, setAssociationRating ] = useState(0);
-  
+  const [type , setType] = useState(null);
+
+  const [association , setAssociation] = useState(false)
+
   const id="606745d5f2f72552140d5743" //id of the logged in user
   const ip="0.0.0.0" //ip adrs of the server 
   
@@ -67,7 +70,10 @@ const UserProfileScreen = () => {
         setAssociationPhone(data.mobile)
         setAssociationName(data.name)
         setAssociationRating(data.rating)
-        
+        if(data.type==='association'){
+          setType('association')
+          setAssociation(true)
+        }else setType('volunteer')
 
       })
       .catch(err => {
@@ -87,25 +93,25 @@ const UserProfileScreen = () => {
   
   const [clicked2, setClicked2] = useState(false);
   
-  const deleteUser = () =>{
-    Alert.alert('Warning','Êtes-vous sûr de vouloir supprimer votre compte ?',[
-        {
-          text:'Annuler',
-          onPress:()=> console.warn('Cancel Pressed!')
-        },
-        {
-          text:'Oui',
-          onPress:()=> {console.warn('OK Pressed!')
-          fetch(`http://${ip}:5050/users/${id}`, { method: 'DELETE' })}
-          //redirection vers le screen du login
-        },
-      ],
-      {
-        cancelable: true,
-        onDismiss: () => console.warn('Alert dismissed!')
-      })
+  // const deleteUser = () =>{
+  //   Alert.alert('Warning','Êtes-vous sûr de vouloir supprimer votre compte ?',[
+  //       {
+  //         text:'Annuler',
+  //         onPress:()=> console.warn('Cancel Pressed!')
+  //       },
+  //       {
+  //         text:'Oui',
+  //         onPress:()=> {console.warn('OK Pressed!')
+  //         fetch(`http://${ip}:5050/users/${id}`, { method: 'DELETE' })}
+  //         //redirection vers le screen du login
+  //       },
+  //     ],
+  //     {
+  //       cancelable: true,
+  //       onDismiss: () => console.warn('Alert dismissed!')
+  //     })
     
-  }
+  // }
 
   const onSubmitEdit = () => {
     
@@ -326,9 +332,9 @@ const UserProfileScreen = () => {
                           </Button>
               </View>
 
-              <Button onPress={deleteUser}color="red" mode="outlined" style={{marginVertical:10, borderRadius:30}}>
+              {/* <Button onPress={deleteUser}color="red" mode="outlined" style={{marginVertical:10, borderRadius:30}}>
                                   Supprimez votre compte
-              </Button>
+              </Button> */}
 
             </View>
           
@@ -363,7 +369,7 @@ const UserProfileScreen = () => {
                       <Text style={{color:"#777777", marginLeft: 10}}>{associationEmail}</Text>
                     </View>
 
-                    <View style={styles.row}>
+                    {association? <View style={styles.row}>
                       {associationRating>0 ?<RateIcon name="emoji-flirt" color="#777777" size={20}/> : null}
                       {associationRating==0 ?<RateIcon name="emoji-neutral" color="#777777" size={20}/> : null}
 
@@ -372,7 +378,7 @@ const UserProfileScreen = () => {
 
 
                       <Text style={{color:"#777777", marginLeft: 10}}>Rating : {associationRating}</Text>
-                    </View>
+                    </View> : null}
 
                     
 
@@ -401,7 +407,7 @@ const UserProfileScreen = () => {
                     </View>
 
                     {/* Events */}
-                    <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}
+                    {association?<View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}
                     onStartShouldSetResponder={() => {
                       setShouldShowEvents(true)
                       setShouldShowPosts(false)
@@ -410,7 +416,7 @@ const UserProfileScreen = () => {
                     >
                         <Text style={[styles.text, { fontSize: 24 }]}>6</Text>
                         <Text style={[styles.text, styles.subText]}>Événements</Text>
-                    </View>
+                    </View> : null}
                 </View>
 
                {shouldShowPosts? ( <View style={{ marginTop: 32 }}>
