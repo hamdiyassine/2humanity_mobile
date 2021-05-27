@@ -178,7 +178,7 @@ export const SignedIn = createBottomTabNavigator({
   },
   // Contact: {screen: HomeStack},
   // Menu: {screen: HomeStack}, 
-  //Profile : {screen: Profile}
+  //Profile : {screen: Profile},
  
   Events: {screen: EventsStack},
   Favoris: {screen: HomeStack},
