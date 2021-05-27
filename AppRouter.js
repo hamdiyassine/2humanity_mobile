@@ -17,6 +17,9 @@ import HomePage  from "./app/containers/Home";
 // import JobOffersPage  from "./app/containers/JobOffers"; 
 import SigninPage     from "./app/containers/Signin";
 import SignupPage     from "./app/containers/Signup";
+import Profile from "./app/containers/Profile";
+// import ProfileVolunteer from "./app/containers/ProfileVolunteer";
+
 
 import AddPostScreen from "./app/containers/AddPostScreen";
 import RecommendedScreen from './app/containers/RecommendedScreen';
@@ -173,6 +176,10 @@ export const SignedIn = createBottomTabNavigator({
     //   header: HeaderMain,
     // }),
   },
+  // Contact: {screen: HomeStack},
+  // Menu: {screen: HomeStack}, 
+  //Profile : {screen: Profile}
+ 
   Events: {screen: EventsStack},
   Favoris: {screen: HomeStack},
   Menu: {screen: MenuStack}, 
@@ -213,7 +220,7 @@ export const createRootNavigator = (connected=false) => {
   return createSwitchNavigator({SignedIn,SignedOut},
     // Menu, 
     {
-      initialRouteName:  'SignedOut' 
+      initialRouteName:  'SignedIn' 
     }  
   )
 } 

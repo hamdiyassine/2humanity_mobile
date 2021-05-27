@@ -1,8 +1,15 @@
 import React from 'react';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
-import {AsyncStorage, StyleSheet, View, TextInput, Image } from 'react-native';
+import {AsyncStorage, StyleSheet, View, TextInput, Image, Text } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome'; 
+
+import {NavigationContainer} from '@react-navigation/native';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 export default function HeaderMain(nav, changeSearch, toggleAccMdl=null, showUser=true){
   logOut = ()=>{
@@ -29,11 +36,20 @@ export default function HeaderMain(nav, changeSearch, toggleAccMdl=null, showUse
     ), 
 
     headerLeft: (showUser) && ( 
-      <View style={styles.wrapImgUser}>
-        {nav.state.params && nav.state.params.imageurl ?
-          <Image source={{uri: (nav.state.params.imageurl)}} style={styles.imgUser} />:
-<Image source={require('../assets/imgs/profile.png')} style={styles.imgUser} />        }
-      </View>
+     
+        
+    
+
+            <View style={styles.wrapImgUser}>
+
+          
+            {nav.state.params && nav.state.params.imageurl ?
+              <Image source={{uri: (nav.state.params.imageurl)}} style={styles.imgUser} />:
+              <Image source={require('../assets/imgs/profile.png')} style={styles.imgUser} />        }
+            </View>
+           
+    
+      
     ),
  
     headerStyle: {
