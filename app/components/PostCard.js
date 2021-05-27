@@ -28,12 +28,30 @@ class PostCard extends React.Component  {
        })
        console.log(this.state.viewed)
      }
-     addComment(){
-       this.setState({
+     addComment(id){
+       fetch("http://192.168.1.8:5050/comments/"+id,{
+method:"POST",
+headers: {
+  "Content-Type": "application/json"
+},
+body:JSON.stringify({
+comments:[
+    {message:"a message"}
+
+ 
+]
+  
+})
+       })
+       .then(response => {
+        console.log(response)
+      })
+       .then(()=>this.setState({
          comments:this.state.comments+1,
         Allcomments:[...this.state.Allcomments,this.state.newComment]
-       })
-    
+       }))
+       .catch(error => alert("Error " + error))
+
      }
      
      deletePost(id){
@@ -149,7 +167,7 @@ class PostCard extends React.Component  {
        <View style={{flexDirection:'row'}}>
        <TextInput  onChangeText={(value)=>this.setState({newComment:value})} multiline style={{marginLeft:18,marginBottom:20,width:Dimensions.get('window').width*0.55}} multiline  placeholder='Add a comment'/> 
    <View style={{marginLeft:Dimensions.get('window').width*0.10}}>
-         <Button mode="contained" onPress={()=>{this.state.newComment?this.addComment():Alert.alert('please type something')}} color="#1b59a2">Add</Button></View> 
+         <Button mode="contained" onPress={()=>{this.state.newComment?this.addComment(this.props.id):Alert.alert('please type something')}} color="#1b59a2">Add</Button></View> 
    
      
 

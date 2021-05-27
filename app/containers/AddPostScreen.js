@@ -10,6 +10,7 @@ import {add_post,delete_post} from '../redux/posts/actionCreators';
 import {useSelector,useDispatch,connect} from 'react-redux';
 import Home from './Home';
 import PostCard from '../components/PostCard';
+import RNPickerSelect from 'react-native-picker-select';
 
 class AddPostScreen extends React.Component{
 
@@ -21,7 +22,9 @@ class AddPostScreen extends React.Component{
             content:"",
             visible:false,
             newPost:[],
-            Posts:[]
+            Posts:[],
+            category:''
+
         }
     }
    
@@ -46,7 +49,8 @@ class AddPostScreen extends React.Component{
       body: JSON.stringify({
         title: 'title',
         content: this.state.content,
-        media:this.state.image
+        media:this.state.image,
+        category:this.state.category
       })
     })
       .then(response => response.json())
@@ -133,6 +137,23 @@ render(){
         {console.log(this.state.content)}
         {/* onPress={()=>(value)=>dispatch(add_content(value)), */}
         {/* <PostCard content={this.state.content}/> */}
+        <RNPickerSelect
+
+onValueChange={(value) => this.setState({category:value})}
+items={[
+    { label: 'Food', value: 'Food' },
+    { label: 'Clothes', value: 'Clothes' },
+    { label: 'Blood donation', value: 'Blood donation' },
+    { label: 'Educational', value: 'Educational' },
+    { label: 'Environment', value: 'Environment' },
+    { label: 'Other', value: 'Other' },
+
+
+
+]}
+value={this.state.category}
+placeholder={{label:'Select category', value:this.state.category==''?'Select a cateory': this.state.category}}
+/>
           <Button  style={{marginTop:20,width:102,alignSelf:'center',borderColor:'#1b59a2',borderWidth:1}}  mode="outlined"  onPress={()=>this.sendData()} color="#1b59a2">
             Post
          </Button>
