@@ -58,7 +58,7 @@ const UserProfileScreen = () => {
   const [association , setAssociation] = useState(false)
 
   const id="606745d5f2f72552140d5743" //id of the logged in user
-  const ip="192.168.1.8" //ip adrs of the server 
+  const ip="0.0.0.0" //ip adrs of the server 
   
   React.useEffect(() => {
     fetch(`http://${ip}:5050/users/${id}`)
