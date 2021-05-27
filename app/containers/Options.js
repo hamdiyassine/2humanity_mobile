@@ -30,13 +30,13 @@ class OptionsPage extends Component{
   changeSearch = (txt) => this.setState({searchTxt: txt});
   toggleAccMdl = ()=> this.setState((prev)=>({showAccMdl: !prev.showAccMdl}))
 
-  static navigationOptions =  ({ navigation }) => {
-    const {params = {}} = navigation.state;
+  // static navigationOptions =  ({ navigation }) => {
+  //   const {params = {}} = navigation.state;
 
-    return HeaderMain(navigation, params.changeSearch, 
-      params.toggleAccMdl
-    );   
-  }
+  //   return HeaderMain(navigation, params.changeSearch, 
+  //     params.toggleAccMdl
+  //   );   
+  // }
 
   componentDidMount(){
     this.props.navigation.setParams({toggleAccMdl: this.toggleAccMdl,
@@ -130,12 +130,23 @@ class OptionsPage extends Component{
           </View>} 
         </View>
 
+        <View style={{...styles.service,borderTopWidth: 1,borderTopColor: '#ddd'}}
+         onTouchEnd={()=>this.props.navigation.navigate('Événements', {
+          // user:   this.props.user,
+          token:  this.props.token
+        })} >
+          <AntDesign name="user" color={"#ddd"} size={25}/>
+          <View style={styles.srvDescWrap}>
+            <Text style={styles.srvTitle} >Profile</Text>
+          </View>
+        </View> 
+
         <View style={styles.service}
          onTouchEnd={()=>this.props.navigation.navigate('Home', {
             // user:   this.props.user,
             token:  this.props.token
           })} >
-           <AntDesign name="home" color={"#1b59a2"} size={30}/>
+           <AntDesign name="home" color={"#ddd"} size={25}/>
           <View style={styles.srvDescWrap}>
             <Text style={styles.srvTitle} >Accueil</Text>
           </View>
@@ -148,15 +159,37 @@ class OptionsPage extends Component{
           // user:   this.props.user,
           token:  this.props.token
         })} >
-          <AntDesign name="calendar" color={"#1b59a2"} size={30}/>
+          {/* <AntDesign name="Menu" color={"#1b59a2"} size={25}/> */}
+          <Ionicons name="ios-menu" color={"#ddd"} size={25}/>
+          <View style={styles.srvDescWrap}>
+            <Text style={styles.srvTitle} >Activités</Text>
+          </View>
+        </View> 
+
+        
+
+        <View style={styles.service} 
+         onTouchEnd={()=>this.props.navigation.navigate('Événements', {
+          // user:   this.props.user,
+          token:  this.props.token
+        })} >
+          <AntDesign name="calendar" color={"#ddd"} size={25}/>
           <View style={styles.srvDescWrap}>
             <Text style={styles.srvTitle} >Mes Evènements</Text>
           </View>
         </View> 
 
+        <View style={{...styles.service,marginTop:120}} onTouchEnd={this.logOut}  >
+        {/* <AntDesign name="Info" color={"#1b59a2"} size={25}/> */}
+        <Ionicons name="ios-help-circle" color={"#1b59a2"} size={25}/>
+          <View style={styles.srvDescWrap}>
+            <Text style={styles.srvTitle} >A propos</Text>
+          </View>
+        </View> 
 
-        <View style={styles.service} onTouchEnd={this.logOut}  >
-          <Entypo name="log-out" color={"#1b59a2"} size={30}/>
+
+        <View style={styles.service}  onTouchEnd={this.logOut}  >
+          <Entypo name="log-out" color={"#1b59a2"} size={25}/>
           <View style={styles.srvDescWrap}>
             <Text style={styles.srvTitle} >Déconnexion</Text>
           </View>
@@ -170,14 +203,15 @@ class OptionsPage extends Component{
 
 const styles = StyleSheet.create({
   wrap_users:{
-    margin: 10, 
+    paddingTop:50,
+    padding: 10, 
     marginBottom:30,
     flex: 1, flexDirection: 'row', flexWrap: 'wrap',
     // display : 'flex'
   },
   wrapUser : {
       width:500,
-      display:'flex'  
+      paddingLeft: 20,
   },
   wrapImgUser: {
     borderRadius: 50,
@@ -193,8 +227,8 @@ const styles = StyleSheet.create({
   }, 
   userTitle:{
     width: 370, 
-    marginTop:-50,
-    textAlign: 'center',
+    //marginTop:-50,
+    //textAlign: 'center',
     // fontWeight: '500',
     fontSize: 25,
     fontWeight:'bold'
@@ -207,8 +241,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     padding: 10, 
-    borderTopWidth: 1,
-    borderTopColor: '#ddd'
+    // borderTopWidth: 1,
+    // borderTopColor: '#ddd'
   },
   imgSrv: {
     width: 40, height: 47, marginRight: 5,
@@ -220,7 +254,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingLeft: 10,
   },
-  srvTitle:{ fontSize: 20, color: '#424242' },
+  srvTitle:{ fontSize: 17, color: '#424242' },
 }); 
 
 //convert PART of state in STORE to the component PROPS

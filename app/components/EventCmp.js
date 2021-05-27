@@ -55,7 +55,7 @@ export default class Event extends Component{
     return( 
       <View style={styles.wrap}> 
         <TouchableOpacity
-         onPress={()=>this.props.navigation.navigate('Event', {
+         onPress={()=>this.props.navigation.navigate('EventDetail', {
           event, token
         })}
           > 
