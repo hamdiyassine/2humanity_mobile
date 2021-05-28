@@ -1,9 +1,9 @@
 import React, { Component , useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import authActions from '../redux/auth/actions';
-import * as ImagePicker from 'expo-image-picker';
+import RNPickerSelect from 'react-native-picker-select';
 import {StyleSheet, View, Text, TextInput, ActivityIndicator, ScrollView,
-  CheckBox, ToastAndroid, ImageBackground, Image
+  CheckBox, ToastAndroid, ImageBackground, Image, TouchableHighlight, Pressable
 } from 'react-native';
 
 //import ImagePicker from 'react-native-image-picker'
@@ -21,7 +21,10 @@ import ImageUpload from './ImageUpload';
 
 class SignupPage extends Component{
 
-
+  constructor(props) {
+    super(props);
+    //this.state = { color: null };
+}
   static navigationOptions =  ({ navigation }) => {
     return {
       title: "Inscription gratuite", headerTitle: "Inscription gratuite",
@@ -32,18 +35,40 @@ class SignupPage extends Component{
       },
     };
   }
+  
 
   state={
     loading: false,
     checked: false,
+    checked2: false,
+    pressStatus1: false,
+    pressStatus2: false,
+    pressStatus3: false,
+    pressStatus4: false,
+    pressStatus5: false,
+    pressStatus6: false,
+    pressStatus7: false,
+    pressStatus8: false,
+    pressStatus9: false,
+    pressStatus10: false,
+    pressStatus11: false,
     image: null,
+    category:'',
     name: '',
     email: '',
     phone: '',
     pass: '',
     repass: '',
     address: '',
+    type:'volunteer',
   }
+
+  // _onHideUnderlay(pressStatus2){
+  //   this.setState({ pressStatus2: true });
+  // }
+  // _onShowUnderlay(){
+  //   this.setState({ pressStatus2: true });
+  // }
 
   signup = ()=>{ 
 
@@ -62,7 +87,9 @@ class SignupPage extends Component{
           name: this.state.name,
           password: this.state.pass,
           phone: "216" + this.state.phone ,
-          address: this.state.address
+          address: this.state.address,
+          type: this.state.type,
+          category: this.state.category
         }).then(ret=>{
           this.setState({loading: false});
           console.log('RET SIGNUP', ret);
@@ -82,6 +109,7 @@ class SignupPage extends Component{
           // roles: ["ROLE_USER"]
           // username: "name"
         })
+        
       }
     }
     
@@ -114,7 +142,10 @@ class SignupPage extends Component{
   changePass=(txt)      => this.setState({pass:     txt});
   changeRepass=(txt)    => this.setState({repass:   txt});
   changeAddress=(txt)    => this.setState({address:   txt});
-  changeTerms=(checked) => this.setState({checked})
+  changeTerms=(checked) => this.setState({checked});
+  changeType=() => { if (checked) this.setState({type : "association"})};
+  changeCheck=(checked2) => this.setState({checked2})
+  changeAvatar=(txt) => this.setState({image : txt})
   // toggleTerms=(checked)=>{console.log('checked', checked); this.setState((prev)=>({terms: !prev.terms}))};
 
 
@@ -129,6 +160,7 @@ class SignupPage extends Component{
   render(){
 
     const {checked } = this.state
+    const {checked2 } = this.state
     return(
       <ImageBackground source={require('../assets/imgs/bg4.jpg')} style={styles.image}>
       <ScrollView>
@@ -152,7 +184,303 @@ class SignupPage extends Component{
             <Text style={styles.input}> Nous sommes une association </Text>
           </View> 
 
-          <ImageUpload></ImageUpload>
+          {!checked && <View style={{...styles.searchSection, borderWidth: 0}}>
+            <CheckBox value={this.state.checked2} onValueChange={this.changeCheck}  tintColors={{ true: "#1b59a2"}} />
+            <Text style={styles.input}> Choisissez un avatar </Text>
+          </View> }
+
+          {/* <ImageUpload></ImageUpload> */}
+          {checked2 && !checked && <View style={{ marginTop: 32 }}>
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                        
+                       
+
+                        <TouchableHighlight
+                                onPress={()=>{
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922566.png')
+                                  this.setState({pressStatus1 : true,
+                                    pressStatus2 : false,
+                                    pressStatus3 : false,
+                                    pressStatus4 : false,
+                                    pressStatus5 : false,
+                                    pressStatus6 : false,
+                                    pressStatus7 : false,
+                                    pressStatus8 : false,
+                                    pressStatus9 : false,
+                                    pressStatus10 : false,
+                                    pressStatus11 : false,
+                                  })
+                                }}
+                                underlayColor={"#1b59a2"}
+                                activeOpacity={1}
+                                style={this.state.pressStatus1 ? styles.mediaImageContainerPressed : styles.mediaImageContainer}
+                                //onHideUnderlay={styles.mediaImageContainerPressed}
+                                //onShowUnderlay={styles.mediaImageContainerPressed}
+                        >
+                          <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922566.png'}} style={styles.image} resizeMode="cover"></Image>
+
+                        </TouchableHighlight>
+                        
+
+
+                        <TouchableHighlight
+                                onPress={()=>{
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922506.png')
+                                  this.setState({pressStatus1 : false,
+                                    pressStatus2 : true,
+                                    pressStatus3 : false,
+                                    pressStatus4 : false,
+                                    pressStatus5 : false,
+                                    pressStatus6 : false,
+                                    pressStatus7 : false,
+                                    pressStatus8 : false,
+                                    pressStatus9 : false,
+                                    pressStatus10 : false,
+                                    pressStatus11 : false,
+                                  })
+                                }}
+                                underlayColor={"#1b59a2"}
+                                activeOpacity={1}
+                                style={this.state.pressStatus2 ? styles.mediaImageContainerPressed : styles.mediaImageContainer}
+                                //onHideUnderlay={styles.mediaImageContainerPressed}
+                                //onShowUnderlay={styles.mediaImageContainerPressed}
+                        >
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922506.png'}} style={styles.image} resizeMode="cover"></Image>
+                        </TouchableHighlight>
+
+
+
+                        <TouchableHighlight
+                                onPress={()=>{
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922524.png')
+                                  this.setState({pressStatus1 : false,
+                                    pressStatus2 : false,
+                                    pressStatus3 : true,
+                                    pressStatus4 : false,
+                                    pressStatus5 : false,
+                                    pressStatus6 : false,
+                                    pressStatus7 : false,
+                                    pressStatus8 : false,
+                                    pressStatus9 : false,
+                                    pressStatus10 : false,
+                                    pressStatus11 : false,
+                                  })
+                                }}
+                                underlayColor={"#1b59a2"}
+                                activeOpacity={1}
+                                style={this.state.pressStatus3 ? styles.mediaImageContainerPressed : styles.mediaImageContainer}
+                                //onHideUnderlay={styles.mediaImageContainerPressed}
+                                //onShowUnderlay={styles.mediaImageContainerPressed}
+                        >
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922524.png'}} style={styles.image} resizeMode="cover"></Image>
+                        </TouchableHighlight>
+
+
+                        <TouchableHighlight
+                                onPress={()=>{
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922686.png')
+                                  this.setState({pressStatus1 : false,
+                                    pressStatus2 : false,
+                                    pressStatus3 : false,
+                                    pressStatus4 : true,
+                                    pressStatus5 : false,
+                                    pressStatus6 : false,
+                                    pressStatus7 : false,
+                                    pressStatus8 : false,
+                                    pressStatus9 : false,
+                                    pressStatus10 : false,
+                                    pressStatus11 : false,
+                                  })
+                                }}
+                                underlayColor={"#1b59a2"}
+                                activeOpacity={1}
+                                style={this.state.pressStatus4 ? styles.mediaImageContainerPressed : styles.mediaImageContainer}
+                                //onHideUnderlay={styles.mediaImageContainerPressed}
+                                //onShowUnderlay={styles.mediaImageContainerPressed}
+                        >
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922686.png'}} style={styles.image} resizeMode="cover"></Image>
+                        </TouchableHighlight>
+
+
+                        <TouchableHighlight
+                                onPress={()=>{
+                                  this.changeAvatar('https://img-premium.flaticon.com/png/512/2922/2922572.png?token=exp=1622136308~hmac=e532b9dc89e2ab525fe5da7a05cd46bf')
+                                  this.setState({pressStatus1 : false,
+                                    pressStatus2 : false,
+                                    pressStatus3 : false,
+                                    pressStatus4 : false,
+                                    pressStatus5 : true,
+                                    pressStatus6 : false,
+                                    pressStatus7 : false,
+                                    pressStatus8 : false,
+                                    pressStatus9 : false,
+                                    pressStatus10 : false,
+                                    pressStatus11 : false,
+                                  })
+                                }}
+                                underlayColor={"#1b59a2"}
+                                activeOpacity={1}
+                                style={this.state.pressStatus5 ? styles.mediaImageContainerPressed : styles.mediaImageContainer}
+                                //onHideUnderlay={styles.mediaImageContainerPressed}
+                                //onShowUnderlay={styles.mediaImageContainerPressed}
+                        >
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922572.png'}} style={styles.image} resizeMode="cover"></Image>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight
+                                onPress={()=>{
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922511.png')
+                                  this.setState({pressStatus1 : false,
+                                    pressStatus2 : false,
+                                    pressStatus3 : false,
+                                    pressStatus4 : false,
+                                    pressStatus5 : false,
+                                    pressStatus6 : true,
+                                    pressStatus7 : false,
+                                    pressStatus8 : false,
+                                    pressStatus9 : false,
+                                    pressStatus10 : false,
+                                    pressStatus11 : false,
+                                  })
+                                }}
+                                underlayColor={"#1b59a2"}
+                                activeOpacity={1}
+                                style={this.state.pressStatus6 ? styles.mediaImageContainerPressed : styles.mediaImageContainer}
+                                //onHideUnderlay={styles.mediaImageContainerPressed}
+                                //onShowUnderlay={styles.mediaImageContainerPressed}
+                        >
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922511.png'}} style={styles.image} resizeMode="cover"></Image>
+                        </TouchableHighlight>
+
+                        
+                        <TouchableHighlight
+                                onPress={()=>{
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922580.png')
+                                  this.setState({pressStatus1 : false,
+                                    pressStatus2 : false,
+                                    pressStatus3 : false,
+                                    pressStatus4 : false,
+                                    pressStatus5 : false,
+                                    pressStatus6 : false,
+                                    pressStatus7 : true,
+                                    pressStatus8 : false,
+                                    pressStatus9 : false,
+                                    pressStatus10 : false,
+                                    pressStatus11 : false,
+                                  })
+                                }}
+                                underlayColor={"#1b59a2"}
+                                activeOpacity={1}
+                                style={this.state.pressStatus7 ? styles.mediaImageContainerPressed : styles.mediaImageContainer}
+                                //onHideUnderlay={styles.mediaImageContainerPressed}
+                                //onShowUnderlay={styles.mediaImageContainerPressed}
+                        >
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922580.png'}} style={styles.image} resizeMode="cover"></Image>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight
+                                onPress={()=>{
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922580.png')
+                                  this.setState({pressStatus1 : false,
+                                    pressStatus2 : false,
+                                    pressStatus3 : false,
+                                    pressStatus4 : false,
+                                    pressStatus5 : false,
+                                    pressStatus6 : false,
+                                    pressStatus7 : false,
+                                    pressStatus8 : true,
+                                    pressStatus9 : false,
+                                    pressStatus10 : false,
+                                    pressStatus11 : false,
+                                  })
+                                }}
+                                underlayColor={"#1b59a2"}
+                                activeOpacity={1}
+                                style={this.state.pressStatus8 ? styles.mediaImageContainerPressed : styles.mediaImageContainer}
+                                //onHideUnderlay={styles.mediaImageContainerPressed}
+                                //onShowUnderlay={styles.mediaImageContainerPressed}
+                        >
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922649.png'}} style={styles.image} resizeMode="cover"></Image>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight
+                                onPress={()=>{
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922761.png')
+                                  this.setState({pressStatus1 : false,
+                                    pressStatus2 : false,
+                                    pressStatus3 : false,
+                                    pressStatus4 : false,
+                                    pressStatus5 : false,
+                                    pressStatus6 : false,
+                                    pressStatus7 : false,
+                                    pressStatus8 : false,
+                                    pressStatus9 : true,
+                                    pressStatus10 : false,
+                                    pressStatus11 : false,
+                                  })
+                                }}
+                                underlayColor={"#1b59a2"}
+                                activeOpacity={1}
+                                style={this.state.pressStatus9 ? styles.mediaImageContainerPressed : styles.mediaImageContainer}
+                                //onHideUnderlay={styles.mediaImageContainerPressed}
+                                //onShowUnderlay={styles.mediaImageContainerPressed}
+                        >
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922761.png'}} style={styles.image} resizeMode="cover"></Image>
+                        </TouchableHighlight>
+
+
+                        <TouchableHighlight
+                                onPress={()=>{
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922591.png')
+                                  this.setState({pressStatus1 : false,
+                                    pressStatus2 : false,
+                                    pressStatus3 : false,
+                                    pressStatus4 : false,
+                                    pressStatus5 : false,
+                                    pressStatus6 : false,
+                                    pressStatus7 : false,
+                                    pressStatus8 : false,
+                                    pressStatus9 : false,
+                                    pressStatus10 : true,
+                                    pressStatus11 : false,
+                                  })
+                                }}
+                                underlayColor={"#1b59a2"}
+                                activeOpacity={1}
+                                style={this.state.pressStatus10 ? styles.mediaImageContainerPressed : styles.mediaImageContainer}
+                                //onHideUnderlay={styles.mediaImageContainerPressed}
+                                //onShowUnderlay={styles.mediaImageContainerPressed}
+                        >
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922591.png'}} style={styles.image} resizeMode="cover"></Image>
+                        </TouchableHighlight>
+
+                        <TouchableHighlight
+                                onPress={()=>{
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922712.png')
+                                  this.setState({pressStatus1 : false,
+                                    pressStatus2 : false,
+                                    pressStatus3 : false,
+                                    pressStatus4 : false,
+                                    pressStatus5 : false,
+                                    pressStatus6 : false,
+                                    pressStatus7 : false,
+                                    pressStatus8 : false,
+                                    pressStatus9 : false,
+                                    pressStatus10 : false,
+                                    pressStatus11 : true,
+                                  })
+                                }}
+                                underlayColor={"#1b59a2"}
+                                activeOpacity={1}
+                                style={this.state.pressStatus11 ? styles.mediaImageContainerPressed : styles.mediaImageContainer}
+                                //onHideUnderlay={styles.mediaImageContainerPressed}
+                                //onShowUnderlay={styles.mediaImageContainerPressed}
+                        >
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922712.png'}} style={styles.image} resizeMode="cover"></Image>
+                        </TouchableHighlight>
+                    </ScrollView>
+                    
+          </View>}
 
         <View style={{alignItems: 'center', justifyContent: 'center'}} >
           
@@ -187,6 +515,8 @@ class SignupPage extends Component{
               underlineColorAndroid="transparent"
             />
           </View>}
+
+          
           
           {checked && <View style={styles.searchSection}>
             <MdCom style={styles.searchIcon} name="lock-outline" size={20} color="#ddd"/>
@@ -206,7 +536,31 @@ class SignupPage extends Component{
 
           
 
-          {/* <ImageUpload style={styles.searchSection}/> */}
+          {checked && <RNPickerSelect style={styles.category}
+          
+          onValueChange={(value) => this.setState({category:value})}
+          items={[
+            { label: 'Food', value: 'Food' },
+            { label: 'Clothes', value: 'Clothes' },
+            { label: 'Blood donation', value: 'Blood donation' },
+            { label: 'Educational', value: 'Educational' },
+            { label: 'Other', value: 'Other'},
+          ]}
+          pickerProps={{ style: { 
+            height: 70,
+            width:290,
+            overflow: 'hidden',
+            marginHorizontal:40,
+           
+        
+            borderRadius:23,
+          }}}
+          value={this.state.category}
+          placeholder={{label:'Selectionnez une categorie', value:this.state.category==''?'Selectionnez une categorie': this.state.category}}
+          />
+          
+            
+        }
           
 
 
@@ -256,7 +610,39 @@ class SignupPage extends Component{
 }
 
 const styles = StyleSheet.create({
+  mediaImageContainer: {
+    width: 100,
+    height: 100,
+    borderRadius: 12,
+    overflow: "hidden",
+    marginHorizontal: 10
+},
+mediaImageContainerPressed: {
+  width: 100,
+  height: 100,
+  borderRadius: 12,
+  borderColor:"#1b59a2",
+  borderWidth:6,
+  overflow: "hidden",
+  marginHorizontal: 10
+},
+
+category: {
+ 
+  //alignItems:"center",
+  marginHorizontal:30,
+  borderWidth:2,
+  borderColor:'#1b59a2',
+  borderRadius:23,
+  marginTop:15,
+  width:290,
+  height:40,
+  //paddingHorizontal:10,
+  //paddingVertical:2,
   
+  
+},
+
   searchSection: {
     flexDirection: "row",
     flex: 1, 
