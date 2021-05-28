@@ -1,7 +1,7 @@
 import React, { Component , useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import authActions from '../redux/auth/actions';
-import * as ImagePicker from 'expo-image-picker';
+import RNPickerSelect from 'react-native-picker-select';
 import {StyleSheet, View, Text, TextInput, ActivityIndicator, ScrollView,
   CheckBox, ToastAndroid, ImageBackground, Image, TouchableHighlight, Pressable
 } from 'react-native';
@@ -53,6 +53,7 @@ class SignupPage extends Component{
     pressStatus10: false,
     pressStatus11: false,
     image: null,
+    category:'',
     name: '',
     email: '',
     phone: '',
@@ -87,7 +88,8 @@ class SignupPage extends Component{
           password: this.state.pass,
           phone: "216" + this.state.phone ,
           address: this.state.address,
-          type: this.state.type
+          type: this.state.type,
+          category: this.state.category
         }).then(ret=>{
           this.setState({loading: false});
           console.log('RET SIGNUP', ret);
@@ -276,7 +278,7 @@ class SignupPage extends Component{
 
                         <TouchableHighlight
                                 onPress={()=>{
-                                  this.changeAvatar('https://img-premium.flaticon.com/png/512/2922/2922686.png?token=exp=1622136390~hmac=7cb2cc729b0edd01c33e1477b40b6b96')
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922686.png')
                                   this.setState({pressStatus1 : false,
                                     pressStatus2 : false,
                                     pressStatus3 : false,
@@ -296,7 +298,7 @@ class SignupPage extends Component{
                                 //onHideUnderlay={styles.mediaImageContainerPressed}
                                 //onShowUnderlay={styles.mediaImageContainerPressed}
                         >
-                            <Image source={{ uri :'https://img-premium.flaticon.com/png/512/2922/2922686.png?token=exp=1622136390~hmac=7cb2cc729b0edd01c33e1477b40b6b96'}} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922686.png'}} style={styles.image} resizeMode="cover"></Image>
                         </TouchableHighlight>
 
 
@@ -322,12 +324,12 @@ class SignupPage extends Component{
                                 //onHideUnderlay={styles.mediaImageContainerPressed}
                                 //onShowUnderlay={styles.mediaImageContainerPressed}
                         >
-                            <Image source={{ uri :'https://img-premium.flaticon.com/png/512/2922/2922572.png?token=exp=1622136308~hmac=e532b9dc89e2ab525fe5da7a05cd46bf'}} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922572.png'}} style={styles.image} resizeMode="cover"></Image>
                         </TouchableHighlight>
 
                         <TouchableHighlight
                                 onPress={()=>{
-                                  this.changeAvatar('https://img-premium.flaticon.com/png/512/2922/2922511.png?token=exp=1622136449~hmac=2d5942e30f0e4229d7c7ed79c338afed')
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922511.png')
                                   this.setState({pressStatus1 : false,
                                     pressStatus2 : false,
                                     pressStatus3 : false,
@@ -347,13 +349,13 @@ class SignupPage extends Component{
                                 //onHideUnderlay={styles.mediaImageContainerPressed}
                                 //onShowUnderlay={styles.mediaImageContainerPressed}
                         >
-                            <Image source={{ uri :'https://img-premium.flaticon.com/png/512/2922/2922511.png?token=exp=1622136449~hmac=2d5942e30f0e4229d7c7ed79c338afed'}} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922511.png'}} style={styles.image} resizeMode="cover"></Image>
                         </TouchableHighlight>
 
                         
                         <TouchableHighlight
                                 onPress={()=>{
-                                  this.changeAvatar('https://img-premium.flaticon.com/png/512/2922/2922580.png?token=exp=1622136318~hmac=0d219d08589f9b4ad049669d8e798523')
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922580.png')
                                   this.setState({pressStatus1 : false,
                                     pressStatus2 : false,
                                     pressStatus3 : false,
@@ -373,12 +375,12 @@ class SignupPage extends Component{
                                 //onHideUnderlay={styles.mediaImageContainerPressed}
                                 //onShowUnderlay={styles.mediaImageContainerPressed}
                         >
-                            <Image source={{ uri :'https://img-premium.flaticon.com/png/512/2922/2922580.png?token=exp=1622136318~hmac=0d219d08589f9b4ad049669d8e798523'}} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922580.png'}} style={styles.image} resizeMode="cover"></Image>
                         </TouchableHighlight>
 
                         <TouchableHighlight
                                 onPress={()=>{
-                                  this.changeAvatar('https://img-premium.flaticon.com/png/512/2922/2922649.png?token=exp=1622136321~hmac=918a7e2ac2fe730ffa39985cbb46e331')
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922580.png')
                                   this.setState({pressStatus1 : false,
                                     pressStatus2 : false,
                                     pressStatus3 : false,
@@ -398,12 +400,12 @@ class SignupPage extends Component{
                                 //onHideUnderlay={styles.mediaImageContainerPressed}
                                 //onShowUnderlay={styles.mediaImageContainerPressed}
                         >
-                            <Image source={{ uri :'https://img-premium.flaticon.com/png/512/2922/2922649.png?token=exp=1622136321~hmac=918a7e2ac2fe730ffa39985cbb46e331'}} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922649.png'}} style={styles.image} resizeMode="cover"></Image>
                         </TouchableHighlight>
 
                         <TouchableHighlight
                                 onPress={()=>{
-                                  this.changeAvatar('https://img-premium.flaticon.com/png/512/2922/2922761.png?token=exp=1622136324~hmac=80c6dab4618380225cc6552b10d36b45')
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922761.png')
                                   this.setState({pressStatus1 : false,
                                     pressStatus2 : false,
                                     pressStatus3 : false,
@@ -423,13 +425,13 @@ class SignupPage extends Component{
                                 //onHideUnderlay={styles.mediaImageContainerPressed}
                                 //onShowUnderlay={styles.mediaImageContainerPressed}
                         >
-                            <Image source={{ uri :'https://img-premium.flaticon.com/png/512/2922/2922761.png?token=exp=1622136324~hmac=80c6dab4618380225cc6552b10d36b45'}} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922761.png'}} style={styles.image} resizeMode="cover"></Image>
                         </TouchableHighlight>
 
 
                         <TouchableHighlight
                                 onPress={()=>{
-                                  this.changeAvatar('https://img-premium.flaticon.com/png/512/2922/2922591.png?token=exp=1622136325~hmac=a1053c342149122ceb9de73836431455')
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922591.png')
                                   this.setState({pressStatus1 : false,
                                     pressStatus2 : false,
                                     pressStatus3 : false,
@@ -449,12 +451,12 @@ class SignupPage extends Component{
                                 //onHideUnderlay={styles.mediaImageContainerPressed}
                                 //onShowUnderlay={styles.mediaImageContainerPressed}
                         >
-                            <Image source={{ uri :'https://img-premium.flaticon.com/png/512/2922/2922591.png?token=exp=1622136325~hmac=a1053c342149122ceb9de73836431455'}} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922591.png'}} style={styles.image} resizeMode="cover"></Image>
                         </TouchableHighlight>
 
                         <TouchableHighlight
                                 onPress={()=>{
-                                  this.changeAvatar('https://img-premium.flaticon.com/png/512/2922/2922712.png?token=exp=1622136325~hmac=e74ac48f99ebac326be5ceee78fe88dc')
+                                  this.changeAvatar('https://image.flaticon.com/icons/png/512/2922/2922712.png')
                                   this.setState({pressStatus1 : false,
                                     pressStatus2 : false,
                                     pressStatus3 : false,
@@ -474,7 +476,7 @@ class SignupPage extends Component{
                                 //onHideUnderlay={styles.mediaImageContainerPressed}
                                 //onShowUnderlay={styles.mediaImageContainerPressed}
                         >
-                            <Image source={{ uri :'https://img-premium.flaticon.com/png/512/2922/2922712.png?token=exp=1622136325~hmac=e74ac48f99ebac326be5ceee78fe88dc'}} style={styles.image} resizeMode="cover"></Image>
+                            <Image source={{ uri :'https://image.flaticon.com/icons/png/512/2922/2922712.png'}} style={styles.image} resizeMode="cover"></Image>
                         </TouchableHighlight>
                     </ScrollView>
                     
@@ -513,6 +515,8 @@ class SignupPage extends Component{
               underlineColorAndroid="transparent"
             />
           </View>}
+
+          
           
           {checked && <View style={styles.searchSection}>
             <MdCom style={styles.searchIcon} name="lock-outline" size={20} color="#ddd"/>
@@ -532,7 +536,31 @@ class SignupPage extends Component{
 
           
 
-          {/* <ImageUpload style={styles.searchSection}/> */}
+          {checked && <RNPickerSelect style={styles.category}
+          
+          onValueChange={(value) => this.setState({category:value})}
+          items={[
+            { label: 'Food', value: 'Food' },
+            { label: 'Clothes', value: 'Clothes' },
+            { label: 'Blood donation', value: 'Blood donation' },
+            { label: 'Educational', value: 'Educational' },
+            { label: 'Other', value: 'Other'},
+          ]}
+          pickerProps={{ style: { 
+            height: 70,
+            width:290,
+            overflow: 'hidden',
+            marginHorizontal:40,
+           
+        
+            borderRadius:23,
+          }}}
+          value={this.state.category}
+          placeholder={{label:'Selectionnez une categorie', value:this.state.category==''?'Selectionnez une categorie': this.state.category}}
+          />
+          
+            
+        }
           
 
 
@@ -597,6 +625,22 @@ mediaImageContainerPressed: {
   borderWidth:6,
   overflow: "hidden",
   marginHorizontal: 10
+},
+
+category: {
+ 
+  //alignItems:"center",
+  marginHorizontal:30,
+  borderWidth:2,
+  borderColor:'#1b59a2',
+  borderRadius:23,
+  marginTop:15,
+  width:290,
+  height:40,
+  //paddingHorizontal:10,
+  //paddingVertical:2,
+  
+  
 },
 
   searchSection: {
