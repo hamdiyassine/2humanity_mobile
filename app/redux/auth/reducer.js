@@ -7,7 +7,10 @@ let initState = new Map({
   user: null,
   connected: false,
   loading: false,
+ 
 });
+
+
 
 export default function authReducer(state = initState, action) {
   switch (action.type) {
@@ -46,7 +49,7 @@ export default function authReducer(state = initState, action) {
     case actions.GET_USER_DETAILS_ERROR:
      // console.log('Get user error', actions)
       return state.set('loading', false);
-
+    
     case actions.LOGOUT:
       // console.log('initState.merge(gettoken())', initState.merge(gettoken()))
       return initState;
