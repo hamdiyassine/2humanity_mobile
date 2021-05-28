@@ -131,7 +131,7 @@ class OptionsPage extends Component{
         </View>
 
         <View style={{...styles.service,borderTopWidth: 1,borderTopColor: '#ddd'}}
-         onTouchEnd={()=>this.props.navigation.navigate('Événements', {
+         onTouchEnd={()=>this.props.navigation.navigate('Profile', {
           // user:   this.props.user,
           token:  this.props.token
         })} >

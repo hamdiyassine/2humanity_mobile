@@ -73,6 +73,7 @@ const MenuStack = createStackNavigator({
   Menu: { screen: OptionsPage},
 
   Événements: EventsPage ,
+  Profile : Profile,
   
   Event: EventPage,
  }, 
@@ -181,10 +182,11 @@ export const SignedIn = createBottomTabNavigator({
   //Profile : {screen: Profile}
  
   Events: {screen: EventsStack},
-  Favoris: {screen: HomeStack},
-  Menu: {screen: MenuStack}, 
+  //Favoris: {screen: HomeStack},
+  
   Recommend:{screen:Recommendation},
-  Top:{screen:topUsers}
+  Top:{screen:topUsers},
+  Menu: {screen: MenuStack}, 
   // Recommend: {screen: RecommendedScreen}, 
  // Users: UsersStack
 },{
@@ -199,11 +201,11 @@ export const SignedIn = createBottomTabNavigator({
      //   case 'Users': iconName = 'ios-people'; break;
         case 'Favoris': iconName = 'md-planet'; break;
         case 'Events': iconName = 'md-calendar'; break;
-        case 'Recommend': iconName = 'compass'; break;
-        case 'Top':iconName='star'; break;
+        case 'Recommend': iconName = 'ios-compass'; break;
+        case 'Top':iconName='ios-star'; break;
         
        //   IconComponent = NotifIconWithBadge;   
-        break; 
+      // break; 
         case 'Menu': iconName = 'md-menu'; break;
       }
       return <IconComponent name={iconName} size={25} color={tintColor} />;
@@ -220,7 +222,7 @@ export const createRootNavigator = (connected=false) => {
   return createSwitchNavigator({SignedIn,SignedOut},
     // Menu, 
     {
-      initialRouteName:  'SignedIn' 
+      initialRouteName:  'SignedOut' 
     }  
   )
 } 

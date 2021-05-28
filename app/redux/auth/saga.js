@@ -3,35 +3,47 @@ import { call, all, takeEvery, put, fork } from 'redux-saga/effects';
 // import { push } from 'react-router-redux';
 // import { clearToken } from '../../helpers/utility';
 import actions from './actions';
-
+import axios from 'axios'
 //import { userSrv } from "../../services/api";
+
+const loginWithEmailPasswordAsync = async (email, pass) => {
+  //console.log("loginWithEmailPasswordAsync : ",email,password);
+  
+  return await axios.post("http://192.168.1.12:5050/users/login", { email, pass })
+    .then(resp => {
+      //console.log("resp : ",resp);
+      return resp
+    })
+    .catch(error => { return (error && error.response) ? error.response : error })
+}
+
 
 export function* loginRequest(props) {
   yield takeEvery("LOGIN_REQUEST", function* (action) {
     try {
-      yield put({
-        type: actions.LOGIN_SUCCESS, 
-        token: "00", 
-        user_type: "user",
-      });
-      //const loginResp = yield call("http://51.91.99.118:5000/users/login", action.payload.username, action.payload.password)
-     // console.log('LOGIN RESP', loginResp)
+      
+      console.log('/////// LOGIN_REQUEST : ' , action.payload.username , action.payload.password)
+      
+       const email = action.payload.username ;
+       const pass  = action.payload.password ;
 
-      // if(loginResp.status ){
-      //   yield put({
-      //     type: actions.LOGIN_SUCCESS, 
-      //     token: loginResp.data.data.session_id, 
-      //     user_type: loginResp.data.data.user_type,
-      //   });
+       const connect = yield call(loginWithEmailPasswordAsync, email, pass);
 
-      //   yield put({
-      //     type: actions.GET_USER_DETAILS, 
-      //     token: loginResp.data.data.session_id, 
-      //     user_type: loginResp.data.data.user_type,
-      //   });
+       console.log('LOGIN RESP', connect);
+       if (connect && connect.status == 200) {
+  
+        yield put({
+              type: actions.LOGIN_SUCCESS, 
+              token: connect.data.user.token, 
+              user_type: connect.data.user.type,
+            });
 
-      // }
-      // else yield put({type: actions.LOGIN_ERROR, message: JSON.parse(loginResp.data._bodyText).message}); 
+      } else {
+        //history.push('/');
+       yield put({type: actions.LOGIN_ERROR, message: 'login error'}); 
+      }
+
+
 
     } catch (e) {
       yield put({type: actions.LOGIN_ERROR, message: e.message});
@@ -43,15 +55,6 @@ export function* initAuth(props) {
   yield takeEvery("INIT_AUTH", function* (action) {
     try {
       const data = yield AsyncStorage.multiGet(['token', 'user_type','user'])
-
-      //=================+++++> a verifier
-//console.log('========++++++++++> data',data);
-// console.log("======================>data", {
-//   token: data[0][1], 
-//   user_type: data[1][1],
-//   user: data[2][1],
-
-// });
 
       yield put({ 
         type: actions.INIT_AUTH_SUCCESS, 

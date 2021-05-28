@@ -23,17 +23,15 @@ export default function HeaderMain(nav, changeSearch, toggleAccMdl=null, showUse
     headerTitle: 
     <View style={styles.searchSection}>
         {/* <Ionicons style={styles.searchIcon} name="ios-search" size={20} color="#ddd"/> */}
-        <Icon style={styles.searchIcon} name="search" size={17} color="#ddd"/>
+        {/* <Icon style={styles.searchIcon} name="search" size={17} color="#ddd"/>
         <TextInput style={styles.input} placeholder="Rechercher" 
         //   onChangeText={changeSearch}
           underlineColorAndroid="transparent"
-        />
+        /> */}
+        <Text style={styles.Apptitle} >2Humanity</Text>
+
     </View>,
-    headerRight: (
-      <Icon 
-        //onPress={()=>toggleAccMdl()} 
-        name="bell-o" color='black' size={20} style={{marginRight: 20}}/>
-    ), 
+    
 
     headerLeft: (showUser) && ( 
      
@@ -45,7 +43,7 @@ export default function HeaderMain(nav, changeSearch, toggleAccMdl=null, showUse
           
             {nav.state.params && nav.state.params.imageurl ?
               <Image source={{uri: (nav.state.params.imageurl)}} style={styles.imgUser} />:
-              <Image source={require('../assets/imgs/profile.png')} style={styles.imgUser} />        }
+              <Image source={require('../assets/imgs/2hum.png')} style={styles.imgUser} />        }
             </View>
            
     
@@ -71,17 +69,23 @@ const styles = StyleSheet.create({
     marginLeft: 10, 
   },
   imgUser: {
-    width: 30, height: 30,
+    width: 40, height: 40,
   },
 
   searchSection: {
     width: '100%',
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    //justifyContent: 'center',
+    //alignItems: 'center',
+    //backgroundColor: '#fff',
     borderRadius: 3
+  },
+  Apptitle: {
+    color:'#fff',
+    fontWeight:'bold',
+    fontSize:30 ,
+    marginLeft:70
   },
   searchIcon: { padding: 5 },
   input: {
